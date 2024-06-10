@@ -1,4 +1,4 @@
-package dev.snackoverflow.noworryallergen.model;
+package dev.snackoverflow.noworryallergen.models;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -23,7 +23,7 @@ public class Pet {
 
     }
 
-    public void addFoodLog(String logId) {
+    public void addFoodLog(Food food) {
 
     }
 
@@ -31,7 +31,7 @@ public class Pet {
 
     }
 
-    public void addAllergyLog(String logId) {
+    public void addAllergyLog(Allergy allergy) {
 
     }
 
@@ -40,6 +40,12 @@ public class Pet {
     }
 
     public void identifyCommonAllergens() {
-
+        allergenTracker.forEach((component, severity) -> {
+            if (severity > 5) {
+                System.out.println("Component: " + component + ", Total Severity: " + severity);
+            }
+        });
     }
+
+
 }

@@ -1,4 +1,4 @@
-package dev.snackoverflow.noworryallergen.model;
+package dev.snackoverflow.noworryallergen.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
