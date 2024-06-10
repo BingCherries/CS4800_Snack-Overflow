@@ -1,5 +1,4 @@
-public class Ingredient
-{
+public class Ingredient {
     private String name;
     private String[] components;
 
@@ -9,10 +8,10 @@ public class Ingredient
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public String[] getComponents() {
-        return components;
+        return this.components;
     }
 }

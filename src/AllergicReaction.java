@@ -1,5 +1,4 @@
-public class AllergicReaction
-{
+public class AllergicReaction {
     private Ingredient ingredient;
     private String symptoms;
     private int severity;
@@ -11,14 +10,15 @@ public class AllergicReaction
     }
 
     public Ingredient getIngredient() {
-        return ingredient;
+        return this.ingredient;
     }
 
     public String getSymptoms() {
-        return symptoms;
+        return this.symptoms;
     }
 
     public int getSeverity() {
-        return severity;
+        return this.severity;
     }
 }
+
