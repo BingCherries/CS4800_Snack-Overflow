@@ -19,4 +19,10 @@ public class AllergyController {
     public List<String> getCommonAllergens() {
         return allergyService.identifyCommonAllergens();
     }
+
+    @GetMapping("/")
+    public String setup_api() {
+        System.out.println("reached allergy controller!");
+        return "hello, world";
+    }
 }

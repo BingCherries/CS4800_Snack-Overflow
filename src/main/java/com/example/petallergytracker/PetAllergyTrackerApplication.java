@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.context.annotation.Bean;
+
 import java.util.concurrent.Executor;
 
 @SpringBootApplication // This annotation denotes a configuration class that declares one or more @Bean methods and
