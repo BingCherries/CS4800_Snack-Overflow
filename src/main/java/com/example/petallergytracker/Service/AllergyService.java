@@ -1,5 +1,8 @@
-package com.example.petallergytracker;
+package com.example.petallergytracker.Service;
 
+import com.example.petallergytracker.Models.Ingredient;
+import com.example.petallergytracker.Repository.IngredientRepository;
+import com.example.petallergytracker.Repository.AllergicReactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;

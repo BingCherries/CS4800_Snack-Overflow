@@ -1,4 +1,4 @@
-package com.example.petallergytracker;
+package com.example.petallergytracker.Models;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

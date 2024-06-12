@@ -1,5 +1,7 @@
-package com.example.petallergytracker;
+package com.example.petallergytracker.Service;
 
+import com.example.petallergytracker.IngredientAddedEvent;
+import com.example.petallergytracker.Models.Ingredient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;

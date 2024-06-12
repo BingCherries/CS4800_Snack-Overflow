@@ -1,5 +1,6 @@
-package com.example.petallergytracker;
+package com.example.petallergytracker.Repository;
 
+import com.example.petallergytracker.Models.AllergicReaction;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import java.util.List;

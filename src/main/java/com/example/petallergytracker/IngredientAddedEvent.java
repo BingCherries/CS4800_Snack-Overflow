@@ -1,5 +1,6 @@
 package com.example.petallergytracker;
 
+import com.example.petallergytracker.Models.Ingredient;
 import org.springframework.context.ApplicationEvent;
 
 public class IngredientAddedEvent extends ApplicationEvent {

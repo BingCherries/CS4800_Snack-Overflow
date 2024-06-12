@@ -1,5 +1,6 @@
-package com.example.petallergytracker;
+package com.example.petallergytracker.Controller;
 
+import com.example.petallergytracker.Service.AllergyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
