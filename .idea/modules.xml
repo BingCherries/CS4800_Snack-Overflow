@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/CS4800_Snack-Overflow.iml" filepath="$PROJECT_DIR$/.idea/CS4800_Snack-Overflow.iml" />
+      <module fileurl="file://$PROJECT_DIR$/noworryallergen/noworryallergen.iml" filepath="$PROJECT_DIR$/noworryallergen/noworryallergen.iml" />
     </modules>
   </component>
 </project>
