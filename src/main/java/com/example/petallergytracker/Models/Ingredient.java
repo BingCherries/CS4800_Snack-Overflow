@@ -6,12 +6,16 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import java.util.List;
 import jakarta.persistence.ElementCollection;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * Represents an ingredient entity in the database.
  * Each ingredient has a unique ID, a name, and a list of components associated with it.
  */
 @Entity  // This annotation specifies that the class is an entity and is mapped to a database table.
+@Getter
+@Setter
 public class Ingredient {
 
     @Id  // Marks the id field as the primary key of the entity.
@@ -35,56 +39,6 @@ public class Ingredient {
      */
     public Ingredient(String name, List<String> components) {
         this.name = name;
-        this.components = components;
-    }
-
-    // Getters and Setters
-
-    /**
-     * Returns the ID of the ingredient.
-     * @return the ID of the ingredient.
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * Sets the ID of the ingredient.
-     * @param id The new ID of the ingredient.
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    /**
-     * Returns the name of the ingredient.
-     * @return the name of the ingredient.
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * Sets the name of the ingredient.
-     * @param name The new name of the ingredient.
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
-     * Returns the components of the ingredient.
-     * @return the components of the ingredient.
-     */
-    public List<String> getComponents() {
-        return components;
-    }
-
-    /**
-     * Sets the components of the ingredient.
-     * @param components The new components of the ingredient.
-     */
-    public void setComponents(List<String> components) {
         this.components = components;
     }
 }

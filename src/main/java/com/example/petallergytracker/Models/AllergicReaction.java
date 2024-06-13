@@ -7,12 +7,17 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Column;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * Entity representing an allergic reaction to a specific ingredient.
  * Stores details about the reaction including symptoms, severity, and the ingredient involved.
  */
 @Entity
+@Getter
+@Setter
 public class AllergicReaction {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -41,40 +46,6 @@ public class AllergicReaction {
     public AllergicReaction(Ingredient ingredient, String symptoms, int severity) {
         this.ingredient = ingredient;
         this.symptoms = symptoms;
-        this.severity = severity;
-    }
-
-    // Getters and Setters
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Ingredient getIngredient() {
-        return ingredient;
-    }
-
-    public void setIngredient(Ingredient ingredient) {
-        this.ingredient = ingredient;
-    }
-
-    public String getSymptoms() {
-        return symptoms;
-    }
-
-    public void setSymptoms(String symptoms) {
-        this.symptoms = symptoms;
-    }
-
-    public int getSeverity() {
-        return severity;
-    }
-
-    public void setSeverity(int severity) {
         this.severity = severity;
     }
 }

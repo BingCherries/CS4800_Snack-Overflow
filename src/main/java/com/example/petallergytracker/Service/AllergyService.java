@@ -1,10 +1,14 @@
 package com.example.petallergytracker.Service;
 
+import com.example.petallergytracker.Models.AllergicReaction;
 import com.example.petallergytracker.Models.Ingredient;
 import com.example.petallergytracker.Repository.IngredientRepository;
 import com.example.petallergytracker.Repository.AllergicReactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -43,5 +47,26 @@ public class AllergyService {
      */
     public List<Ingredient> findAllIngredients() {
         return ingredientRepository.findAll();
+    }
+
+    /*
+    * Test
+    * */
+    public List<AllergicReaction> AllergicReactionRepositoryFindAll() {
+        return allergicReactionRepository.findAll();
+    }
+
+    public AllergicReaction createAllergyReaction(AllergicReaction allergicReaction) {
+//        // save an allergy
+//        Ingredient ingredient1 = new Ingredient("Food1", new ArrayList<String>(Arrays.asList("cheese","milk","...")));
+//        AllergicReaction allergicReaction1 = new AllergicReaction(ingredient1, "vomit", 4);
+
+        // Save the ingredient first
+        Ingredient ingredient = allergicReaction.getIngredient();
+        if (ingredient.getId() == null) {
+            ingredient = ingredientRepository.save(ingredient);
+        }
+
+        return allergicReactionRepository.save(allergicReaction);
     }
 }

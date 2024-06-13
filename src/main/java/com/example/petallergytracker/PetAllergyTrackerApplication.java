@@ -27,4 +27,5 @@ public class PetAllergyTrackerApplication {
         executor.initialize(); // Initializes the executor.
         return executor; // Returns the fully configured thread pool executor.
     }
+
 }
