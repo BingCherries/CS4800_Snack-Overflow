@@ -98,19 +98,22 @@ public class PetAllergyTrackerService {
         allergicReactionRepository.deleteAll();
     }
 
-    /**
-     * Identifies common allergens based on the number of allergic reactions recorded.
-     * This method fetches aggregated data from the repository and filters for high frequency allergens.
-     * @return A list of allergens that are considered common based on a predefined threshold.
-     */
     public List<String> identifyCommonAllergens() {
-        List<Object[]> reactionCounts = allergicReactionRepository.countReactionsByIngredient();
         final int threshold = 5; // Threshold can be adjusted based on needs
-        return reactionCounts.stream()
-                .filter(arr -> (long) arr[1] > threshold) // Filter by threshold
-                .map(arr -> (String) arr[0]) // Extract ingredient name
-                .collect(Collectors.toList());
+        return allergicReactionRepository.findComponentsAppearingMoreThan(threshold);
     }
 
-
+    //    /**
+//     * Identifies common allergens based on the number of allergic reactions recorded.
+//     * This method fetches aggregated data from the repository and filters for high frequency allergens.
+//     * @return A list of allergens that are considered common based on a predefined threshold.
+//     */
+//    public List<String> identifyCommonAllergens() {
+//        List<Object[]> reactionCounts = allergicReactionRepository.countReactionsByIngredient();
+//        final int threshold = 5; // Threshold can be adjusted based on needs
+//        return reactionCounts.stream()
+//                .filter(arr -> (long) arr[1] > threshold) // Filter by threshold
+//                .map(arr -> (String) arr[0]) // Extract ingredient name
+//                .collect(Collectors.toList());
+//    }
 }

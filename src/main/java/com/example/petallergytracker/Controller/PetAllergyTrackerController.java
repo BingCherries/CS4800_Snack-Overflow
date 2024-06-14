@@ -60,7 +60,7 @@ public class PetAllergyTrackerController {
         if (!Ingredients.isEmpty()) {
             return new ResponseEntity<List<Ingredient>>(Ingredients, HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
     }
 
@@ -71,7 +71,7 @@ public class PetAllergyTrackerController {
         if (!Ingredients.isEmpty()) {
             return new ResponseEntity<List<Ingredient>>(Ingredients, HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
     }
 
@@ -126,7 +126,7 @@ public class PetAllergyTrackerController {
         if (!allergicReactions.isEmpty()) {
             return new ResponseEntity<List<AllergicReaction>>(allergicReactions, HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
     }
 
@@ -137,7 +137,7 @@ public class PetAllergyTrackerController {
         if (!allergicReactions.isEmpty()) {
             return new ResponseEntity<List<AllergicReaction>>(allergicReactions, HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
     }
 
@@ -152,15 +152,26 @@ public class PetAllergyTrackerController {
         petAllergyTrackerService.deleteAllAllergicReactions();
     }
 
-    /**
-     * Endpoint to retrieve common allergens based on recorded allergic reactions.
-     * @return A list of common allergens.
-     */
-    @GetMapping("/common-allergens")
+    @GetMapping("/commonallergens")
     public ResponseEntity<List<String>> getCommonAllergens() {
         List<String> commonAllergens = petAllergyTrackerService.identifyCommonAllergens();
-        System.out.println(commonAllergens);
-        return new ResponseEntity<List<String>>(commonAllergens, HttpStatus.OK);
+
+        if (!commonAllergens.isEmpty()) {
+            return new ResponseEntity<List<String>>(commonAllergens, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
     }
+
+    //    /**
+//     * Endpoint to retrieve common allergens based on recorded allergic reactions.
+//     * @return A list of common allergens.
+//     */
+//    @GetMapping("/common-allergens")
+//    public ResponseEntity<List<String>> getCommonAllergens() {
+//        List<String> commonAllergens = petAllergyTrackerService.identifyCommonAllergens();
+//        System.out.println(commonAllergens);
+//        return new ResponseEntity<List<String>>(commonAllergens, HttpStatus.OK);
+//    }
 
 }
