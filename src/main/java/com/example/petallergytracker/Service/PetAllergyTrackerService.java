@@ -86,7 +86,7 @@ public class PetAllergyTrackerService {
      * Retrieves all ingredients from the database.
      * @return A list of all ingredients.
      */
-    public List<AllergicReaction> findAllAllergicReaction() {
+    public List<AllergicReaction> findAllAllergicReactions() {
         return allergicReactionRepository.findAll();
     }
 
@@ -94,7 +94,7 @@ public class PetAllergyTrackerService {
         return allergicReactionRepository.deleteAllergicReactionById(allergicReactionId);
     }
 
-    public void deleteAllAllergicReaction() {
+    public void deleteAllAllergicReactions() {
         allergicReactionRepository.deleteAll();
     }
 

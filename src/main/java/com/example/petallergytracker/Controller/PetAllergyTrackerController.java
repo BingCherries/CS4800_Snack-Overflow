@@ -2,7 +2,6 @@ package com.example.petallergytracker.Controller;
 
 import com.example.petallergytracker.Models.AllergicReaction;
 import com.example.petallergytracker.Models.Ingredient;
-import com.example.petallergytracker.Service.IngredientService;
 import com.example.petallergytracker.Service.PetAllergyTrackerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -122,7 +121,7 @@ public class PetAllergyTrackerController {
 
     @GetMapping("/allergies")
     public ResponseEntity<List<AllergicReaction>> findAllAllergyReactions() {
-        List<AllergicReaction> allergicReactions = petAllergyTrackerService.findAllAllergicReaction();
+        List<AllergicReaction> allergicReactions = petAllergyTrackerService.findAllAllergicReactions();
 
         if (!allergicReactions.isEmpty()) {
             return new ResponseEntity<List<AllergicReaction>>(allergicReactions, HttpStatus.OK);
@@ -150,7 +149,7 @@ public class PetAllergyTrackerController {
 
     @DeleteMapping("/allergies")
     public void deleteAllAllergyReactions() {
-        petAllergyTrackerService.deleteAllAllergicReaction();
+        petAllergyTrackerService.deleteAllAllergicReactions();
     }
 
     /**
