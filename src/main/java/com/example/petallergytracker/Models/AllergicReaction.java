@@ -1,33 +1,29 @@
 package com.example.petallergytracker.Models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.Column;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
  * Entity representing an allergic reaction to a specific ingredient.
  * Stores details about the reaction including symptoms, severity, and the ingredient involved.
  */
+@Document("allergyreactions")
 @Entity
 @Getter
 @Setter
 public class AllergicReaction {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @ManyToOne  // Many reactions can be associated with one ingredient
-    @JoinColumn(name = "ingredient_id", nullable = false)  // Foreign key to Ingredient table
+//    @ManyToOne(cascade = CascadeType.ALL)  // Many reactions can be associated with one ingredient
+//    @JoinColumn(name = "ingredient_id", nullable = false)  // Foreign key to Ingredient table
     private Ingredient ingredient;
-
-    @Column(length = 500)
+//
+//    @Column(length = 500)
     private String symptoms;  // Description of the allergic symptoms
 
     private int severity;  // Severity of the reaction, scaled 1-10

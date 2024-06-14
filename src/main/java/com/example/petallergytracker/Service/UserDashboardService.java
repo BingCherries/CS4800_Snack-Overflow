@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 public class UserDashboardService {
 
     @Autowired
-    private AllergyService allergyService;
+    private PetAllergyTrackerService petAllergyTrackerService;
 
     @Autowired
     private AllergicReactionRepository allergicReactionRepository;  // Direct access to repository
@@ -25,7 +25,7 @@ public class UserDashboardService {
      * @return List of ingredient names.
      */
     public List<String> getAllIngredients() {
-        return allergyService.findAllIngredients().stream()
+        return petAllergyTrackerService.findAllIngredients().stream()
                              .map(Ingredient::getName)
                              .collect(Collectors.toList());
     }
@@ -43,26 +43,26 @@ public class UserDashboardService {
                                          .collect(Collectors.toList());
     }
 
-    /**
-     * Retrieves a list of identified common allergens from the allergy service.
-     * @return List of common allergens.
-     */
-    public List<String> getIdentifiedCommonAllergens() {
-        return allergyService.identifyCommonAllergens();
-    }
+//    /**
+//     * Retrieves a list of identified common allergens from the allergy service.
+//     * @return List of common allergens.
+//     */
+//    public List<String> getIdentifiedCommonAllergens() {
+//        return petAllergyTrackerService.identifyCommonAllergens();
+//    }
 
     /**
      * Compiles and returns comprehensive dashboard data.
      * This method consolidates various data points for the user dashboard.
      * @return DashboardData containing all relevant information for the user.
      */
-    public DashboardData getDashboardData() {
-        List<String> ingredients = getAllIngredients();
-        List<String> reactions = getAllergicReactionsSummary();
-        List<String> commonAllergens = getIdentifiedCommonAllergens();
-
-        return new DashboardData(ingredients, reactions, commonAllergens);
-    }
+//    public DashboardData getDashboardData() {
+//        List<String> ingredients = getAllIngredients();
+//        List<String> reactions = getAllergicReactionsSummary();
+//        List<String> commonAllergens = getIdentifiedCommonAllergens();
+//
+//        return new DashboardData(ingredients, reactions, commonAllergens);
+//    }
 }
 
 /**

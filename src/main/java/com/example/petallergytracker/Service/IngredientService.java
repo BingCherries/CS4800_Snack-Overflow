@@ -20,4 +20,5 @@ public class IngredientService {
         eventPublisher.publishEvent(new IngredientAddedEvent(this, ingredient));
         return ingredient;
     }
+
 }
