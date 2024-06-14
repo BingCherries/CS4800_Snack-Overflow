@@ -11,6 +11,7 @@ import java.util.concurrent.Executor;
 @SpringBootApplication // This annotation denotes a configuration class that declares one or more @Bean methods and
 // also triggers autoconfiguration and component scanning.
 @EnableAsync  // Enables Spring's asynchronous method execution capability.
+
 public class PetAllergyTrackerApplication {
 
     public static void main(String[] args) {

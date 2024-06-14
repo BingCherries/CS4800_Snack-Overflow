@@ -10,7 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * Entity representing an allergic reaction to a specific ingredient.
  * Stores details about the reaction including symptoms, severity, and the ingredient involved.
  */
-@Document("allergyreactions")
+@Document(collection = "allergyreactions")
 @Entity
 @Getter
 @Setter

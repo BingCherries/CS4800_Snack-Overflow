@@ -55,3 +55,7 @@ build/
 ### VS Code ###
 .vscode/
 >>>>>>> 5b94cc0 (Spring)
+
+
+### ENV Files ###
+.env
