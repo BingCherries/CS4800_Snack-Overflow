@@ -13,12 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("allergyreport")
 public class AllergyReportController {
     @Autowired
     private AllergyReportService allergyReportService;
 
-    @GetMapping("/")
+    @GetMapping("/allergyreport")
     public ResponseEntity<String> getAllergyReport() {
         String allergyReport = allergyReportService.generateAllergyReport();
         if (!allergyReport.isEmpty()) {
