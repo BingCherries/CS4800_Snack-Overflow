@@ -28,7 +28,7 @@ public class AllergyReportService {
 
         // Building the report
         String report = reactions.stream()
-            .map(reaction -> "Ingredient: " + reaction.getIngredient().getName() +
+            .map(reaction -> "Ingredient: " + reaction.getFood().getName() +
                              ", Symptom: " + reaction.getSymptoms() +
                              ", Severity: " + reaction.getSeverity())
             .collect(Collectors.joining("\n"));

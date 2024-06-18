@@ -2,8 +2,7 @@ package com.example.petallergytracker.Models;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+
 import java.util.List;
 import jakarta.persistence.ElementCollection;
 import lombok.*;
@@ -13,15 +12,13 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * Represents an ingredient entity in the database.
  * Each ingredient has a unique ID, a name, and a list of components associated with it.
  */
-@Document(collection = "ingredients")
+@Document(collection = "food")
 @Entity  // This annotation specifies that the class is an entity and is mapped to a database table.
-@Getter
-@Setter
 @Data
 @AllArgsConstructor
 
 
-public class Ingredient {
+public class Food {
 
     @Id  // Marks the id field as the primary key of the entity.
 //    @GeneratedValue(strategy = GenerationType.AUTO)  // Configures the way of increment of the specified column(field).
@@ -31,20 +28,20 @@ public class Ingredient {
 
 //    @ElementCollection  // This annotation is used to define a collection of instances of a basic type or embeddable class.
     @ElementCollection
-    private List<String> components;  // List of components that make up the ingredient.
+    private List<String> ingredients;  // List of components that make up the ingredient.
 
     /**
      * Default constructor for JPA.
      */
-    public Ingredient() {}
+    public Food() {}
 
     /**
      * Constructs a new Ingredient with specified name and components.
      * @param name The name of the ingredient.
-     * @param components The components that make up the ingredient.
+     * @param ingredients The components that make up the ingredient.
      */
-    public Ingredient(String name, List<String> components) {
+    public Food(String name, List<String> ingredients) {
         this.name = name;
-        this.components = components;
+        this.ingredients = ingredients;
     }
 }

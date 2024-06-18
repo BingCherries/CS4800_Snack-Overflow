@@ -1,6 +1,6 @@
 package com.example.petallergytracker.Service;
 
-import com.example.petallergytracker.Models.Ingredient;
+import com.example.petallergytracker.Models.Food;
 import com.example.petallergytracker.Repository.AllergicReactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,8 +25,8 @@ public class UserDashboardService {
      * @return List of ingredient names.
      */
     public List<String> getAllIngredients() {
-        return petAllergyTrackerService.findAllIngredients().stream()
-                             .map(Ingredient::getName)
+        return petAllergyTrackerService.findAllFoods().stream()
+                             .map(Food::getName)
                              .collect(Collectors.toList());
     }
 
@@ -37,7 +37,7 @@ public class UserDashboardService {
      */
     public List<String> getAllergicReactionsSummary() {
         return allergicReactionRepository.findAll().stream()
-                                         .map(reaction -> "Ingredient: " + reaction.getIngredient().getName() +
+                                         .map(reaction -> "Ingredient: " + reaction.getFood().getName() +
                                                           ", Symptoms: " + reaction.getSymptoms() +
                                                           ", Severity: " + reaction.getSeverity())
                                          .collect(Collectors.toList());

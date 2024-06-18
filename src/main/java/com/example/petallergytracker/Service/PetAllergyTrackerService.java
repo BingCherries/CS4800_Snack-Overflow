@@ -1,15 +1,16 @@
 package com.example.petallergytracker.Service;
 
 import com.example.petallergytracker.Models.AllergicReaction;
-import com.example.petallergytracker.Models.Ingredient;
-import com.example.petallergytracker.Repository.IngredientRepository;
+import com.example.petallergytracker.Models.AllergyList;
+import com.example.petallergytracker.Models.Food;
+import com.example.petallergytracker.Repository.AllergyListRepository;
+import com.example.petallergytracker.Repository.FoodRepository;
 import com.example.petallergytracker.Repository.AllergicReactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class PetAllergyTrackerService {
@@ -17,48 +18,50 @@ public class PetAllergyTrackerService {
     @Autowired
     private AllergicReactionRepository allergicReactionRepository;
     @Autowired
-    private IngredientRepository ingredientRepository; // Assuming this repository exists
+    private FoodRepository foodRepository; // Assuming this repository exists
+    @Autowired
+    private AllergyListRepository allergyListRepository;
 
     // Constructor injection is recommended over field injection
-    public PetAllergyTrackerService(AllergicReactionRepository allergicReactionRepository, IngredientRepository ingredientRepository) {
+    public PetAllergyTrackerService(AllergicReactionRepository allergicReactionRepository, FoodRepository foodRepository) {
         this.allergicReactionRepository = allergicReactionRepository;
-        this.ingredientRepository = ingredientRepository;
+        this.foodRepository = foodRepository;
     }
 
     /*
     * ******************** Implement CRUD for IngredientRepository ****************
     *
     * */
-    public Ingredient createIngredient(Ingredient ingredient) {
-        return ingredientRepository.save(ingredient);
+    public Food createFood(Food food) {
+        return foodRepository.save(food);
     }
 
-    public List<Ingredient> createIngredients(List<Ingredient> ingredients) {
-        return ingredientRepository.saveAll(ingredients);
+    public List<Food> createFoods(List<Food> foods) {
+        return foodRepository.saveAll(foods);
     }
 
-    public Optional<Ingredient> findIngredient(Long ingredientId) {
-        return ingredientRepository.findById(ingredientId);
+    public Optional<Food> findFood(Long foodId) {
+        return foodRepository.findById(foodId);
     }
 
-    public List<Ingredient> findIngredients(List<Long> ingredientIds) {
-        return ingredientRepository.findAllById(ingredientIds);
+    public List<Food> findFoods(List<Long> foodIds) {
+        return foodRepository.findAllById(foodIds);
     }
 
     /**
      * Retrieves all ingredients from the database.
      * @return A list of all ingredients.
      */
-    public List<Ingredient> findAllIngredients() {
-        return ingredientRepository.findAll();
+    public List<Food> findAllFoods() {
+        return foodRepository.findAll();
     }
 
-    public Optional<Ingredient> deleteIngredient(Long ingredientId) {
-        return ingredientRepository.deleteIngredientById(ingredientId);
+    public Optional<Food> deleteFood(Long foodId) {
+        return foodRepository.deleteFoodById(foodId);
     }
 
-    public void deleteAllIngredients() {
-        ingredientRepository.deleteAll();
+    public void deleteAllFoods() {
+        foodRepository.deleteAll();
     }
 
 
@@ -70,15 +73,15 @@ public class PetAllergyTrackerService {
         return allergicReactionRepository.save(allergicReaction);
     }
 
-    public List<AllergicReaction> createAllergicReactions(List<AllergicReaction> allergyReactions) {
-        return allergicReactionRepository.saveAll(allergyReactions);
+    public List<AllergicReaction> createAllergicReactions(List<AllergicReaction> allergicReactions) {
+        return allergicReactionRepository.saveAll(allergicReactions);
     }
 
-    public Optional<AllergicReaction> findAllergicReaction(Long allergicReactionId) {
+    public Optional<AllergicReaction> getAllergicReaction(Long allergicReactionId) {
         return allergicReactionRepository.findById(allergicReactionId);
     }
 
-    public List<AllergicReaction> findAllergicReactions(List<Long> allergicReactionIds) {
+    public List<AllergicReaction> getAllergicReactions(List<Long> allergicReactionIds) {
         return allergicReactionRepository.findAllById(allergicReactionIds);
     }
 
@@ -86,7 +89,7 @@ public class PetAllergyTrackerService {
      * Retrieves all ingredients from the database.
      * @return A list of all ingredients.
      */
-    public List<AllergicReaction> findAllAllergicReactions() {
+    public List<AllergicReaction> getAllAllergicReactions() {
         return allergicReactionRepository.findAll();
     }
 
@@ -98,10 +101,12 @@ public class PetAllergyTrackerService {
         allergicReactionRepository.deleteAll();
     }
 
-    public List<String> identifyCommonAllergens() {
+    public List<String> getCommonAllergens() {
         final int threshold = 5; // Threshold can be adjusted based on needs
         return allergicReactionRepository.findComponentsAppearingMoreThan(threshold);
     }
+
+    public List<AllergyList> getAllergyList() {return allergyListRepository.findAll();}
 
     //    /**
 //     * Identifies common allergens based on the number of allergic reactions recorded.

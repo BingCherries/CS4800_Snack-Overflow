@@ -1,6 +1,6 @@
 package com.example.petallergytracker.Service;
 
-import com.example.petallergytracker.Models.Ingredient;
+import com.example.petallergytracker.Models.Food;
 import com.example.petallergytracker.IngredientAddedEvent;
 import com.example.petallergytracker.Repository.AllergicReactionRepository;
 import org.springframework.context.event.EventListener;
@@ -21,10 +21,10 @@ public class AllergyAlertService {
      */
     @EventListener
     public void onIngredientAdded(IngredientAddedEvent event) {
-        Ingredient newIngredient = event.getIngredient();
+        Food newFood = event.getIngredient();
         // Check against known allergens (simplified logic here)
         boolean containsAllergens = allergicReactionRepository.findAll().stream()
-            .anyMatch(reaction -> reaction.getIngredient().equals(newIngredient));
+            .anyMatch(reaction -> reaction.getFood().equals(newFood));
 
         if (containsAllergens) {
             // Logic to send real-time alert

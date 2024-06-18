@@ -1,17 +1,17 @@
 package com.example.petallergytracker;
 
-import com.example.petallergytracker.Models.Ingredient;
+import com.example.petallergytracker.Models.Food;
 import org.springframework.context.ApplicationEvent;
 
 public class IngredientAddedEvent extends ApplicationEvent {
-    private Ingredient ingredient;
+    private Food food;
 
-    public IngredientAddedEvent(Object source, Ingredient ingredient) {
+    public IngredientAddedEvent(Object source, Food food) {
         super(source);
-        this.ingredient = ingredient;
+        this.food = food;
     }
 
-    public Ingredient getIngredient() {
-        return ingredient;
+    public Food getIngredient() {
+        return food;
     }
 }

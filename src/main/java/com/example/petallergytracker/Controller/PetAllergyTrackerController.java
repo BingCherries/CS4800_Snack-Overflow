@@ -1,7 +1,8 @@
 package com.example.petallergytracker.Controller;
 
 import com.example.petallergytracker.Models.AllergicReaction;
-import com.example.petallergytracker.Models.Ingredient;
+import com.example.petallergytracker.Models.AllergyList;
+import com.example.petallergytracker.Models.Food;
 import com.example.petallergytracker.Service.PetAllergyTrackerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,6 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@RequestMapping("petallergy")
 public class PetAllergyTrackerController {
 
     @Autowired
@@ -23,75 +25,75 @@ public class PetAllergyTrackerController {
     }
 
     /*
-    * ******** CRUD for IngredientRepository *********
+    * ******** CRUD using foodRepository *********
     * */
-    @PostMapping("/ingredient")
-    public ResponseEntity<Ingredient> createIngredient(@RequestBody Ingredient ingredient) {
-        Ingredient newIngredient = petAllergyTrackerService.createIngredient(ingredient);
+    @PostMapping("/food")
+    public ResponseEntity<Food> createFood(@RequestBody Food food) {
+        Food newFood = petAllergyTrackerService.createFood(food);
 
-        if (newIngredient != null) {
-            return new ResponseEntity<Ingredient>(newIngredient, HttpStatus.OK);
+        if (newFood != null) {
+            return new ResponseEntity<Food>(newFood, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @PostMapping("/ingredients")
-    public ResponseEntity<List<Ingredient>> createIngredients(@RequestBody List<Ingredient> ingredients) {
-        List<Ingredient> newIngredients = petAllergyTrackerService.createIngredients(ingredients);
+    @PostMapping("/foods")
+    public ResponseEntity<List<Food>> createFoods(@RequestBody List<Food> foods) {
+        List<Food> newFoods = petAllergyTrackerService.createFoods(foods);
 
-        if (!newIngredients.isEmpty()) {
-            return new ResponseEntity<List<Ingredient>>(newIngredients, HttpStatus.OK);
+        if (!newFoods.isEmpty()) {
+            return new ResponseEntity<List<Food>>(newFoods, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @GetMapping("/ingredient")
-    public ResponseEntity<Ingredient> findIngredient(@RequestParam Long id) {
-        Optional<Ingredient> ingredient = petAllergyTrackerService.findIngredient(id);
-        return ingredient.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+    @GetMapping("/food")
+    public ResponseEntity<Food> getFood(@RequestParam Long id) {
+        Optional<Food> food = petAllergyTrackerService.findFood(id);
+        return food.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
-    @GetMapping("/ingredients")
-    public ResponseEntity<List<Ingredient>> findAllIngredients() {
-        List<Ingredient> Ingredients = petAllergyTrackerService.findAllIngredients();
+    @GetMapping("/foods")
+    public ResponseEntity<List<Food>> getAllFoods() {
+        List<Food> foods = petAllergyTrackerService.findAllFoods();
 
-        if (!Ingredients.isEmpty()) {
-            return new ResponseEntity<List<Ingredient>>(Ingredients, HttpStatus.OK);
+        if (!foods.isEmpty()) {
+            return new ResponseEntity<List<Food>>(foods, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
     }
 
-    @GetMapping("/ingredients/byIds")
-    public ResponseEntity<List<Ingredient>> findIngredients(@RequestParam List<Long> ids) {
-        List<Ingredient> Ingredients = petAllergyTrackerService.findIngredients(ids);
+    @GetMapping("/foods/byIds")
+    public ResponseEntity<List<Food>> getFoods(@RequestParam List<Long> ids) {
+        List<Food> foods = petAllergyTrackerService.findFoods(ids);
 
-        if (!Ingredients.isEmpty()) {
-            return new ResponseEntity<List<Ingredient>>(Ingredients, HttpStatus.OK);
+        if (!foods.isEmpty()) {
+            return new ResponseEntity<List<Food>>(foods, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
     }
 
-    @DeleteMapping("/ingredient")
-    public ResponseEntity<Ingredient> deleteIngredient(@RequestParam Long id) {
-        Optional<Ingredient> deletedIngredient = petAllergyTrackerService.deleteIngredient(id);
-        return deletedIngredient.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+    @DeleteMapping("/food")
+    public ResponseEntity<Food> deleteFood(@RequestParam Long id) {
+        Optional<Food> deletedFood = petAllergyTrackerService.deleteFood(id);
+        return deletedFood.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
-    @DeleteMapping("/ingredients")
-    public void deleteAllIngredients() {
-        petAllergyTrackerService.deleteAllIngredients();
+    @DeleteMapping("/foods")
+    public void deleteAllFoods() {
+        petAllergyTrackerService.deleteAllFoods();
     }
 
 
     /*
-     * ******** CRUD for AllergyReactionRepository *********
+     * ******** CRUD using AllergyReactionRepository *********
      * */
     @PostMapping("/allergy")
-    public ResponseEntity<AllergicReaction> createAllergyReaction(@RequestBody AllergicReaction allergicReaction) {
+    public ResponseEntity<AllergicReaction> createAllergicReaction(@RequestBody AllergicReaction allergicReaction) {
         AllergicReaction newAllergicReaction = petAllergyTrackerService.createAllergicReaction(allergicReaction);
 
         if (newAllergicReaction != null) {
@@ -102,7 +104,7 @@ public class PetAllergyTrackerController {
     }
 
     @PostMapping("/allergies")
-    public ResponseEntity<List<AllergicReaction>> createAllergyReactions(@RequestBody List<AllergicReaction> allergicReactions) {
+    public ResponseEntity<List<AllergicReaction>> createAllergicReactions(@RequestBody List<AllergicReaction> allergicReactions) {
         List<AllergicReaction> newAllergicReactions = petAllergyTrackerService.createAllergicReactions(allergicReactions);
 
         if (!newAllergicReactions.isEmpty()) {
@@ -113,15 +115,15 @@ public class PetAllergyTrackerController {
     }
 
     @GetMapping("/allergy")
-    public ResponseEntity<AllergicReaction> findAllergyReaction(@RequestParam Long id) {
-        Optional<AllergicReaction> allergicReaction = petAllergyTrackerService.findAllergicReaction(id);
+    public ResponseEntity<AllergicReaction> getAllergicReaction(@RequestParam Long id) {
+        Optional<AllergicReaction> allergicReaction = petAllergyTrackerService.getAllergicReaction(id);
         return allergicReaction.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
 
     @GetMapping("/allergies")
-    public ResponseEntity<List<AllergicReaction>> findAllAllergyReactions() {
-        List<AllergicReaction> allergicReactions = petAllergyTrackerService.findAllAllergicReactions();
+    public ResponseEntity<List<AllergicReaction>> getAllAllergicReactions() {
+        List<AllergicReaction> allergicReactions = petAllergyTrackerService.getAllAllergicReactions();
 
         if (!allergicReactions.isEmpty()) {
             return new ResponseEntity<List<AllergicReaction>>(allergicReactions, HttpStatus.OK);
@@ -131,8 +133,8 @@ public class PetAllergyTrackerController {
     }
 
     @GetMapping("/allergies/byIds")
-    public ResponseEntity<List<AllergicReaction>> findAllergyReactions(@RequestParam List<Long> ids) {
-        List<AllergicReaction> allergicReactions = petAllergyTrackerService.findAllergicReactions(ids);
+    public ResponseEntity<List<AllergicReaction>> getAllergicReactions(@RequestParam List<Long> ids) {
+        List<AllergicReaction> allergicReactions = petAllergyTrackerService.getAllergicReactions(ids);
 
         if (!allergicReactions.isEmpty()) {
             return new ResponseEntity<List<AllergicReaction>>(allergicReactions, HttpStatus.OK);
@@ -142,19 +144,20 @@ public class PetAllergyTrackerController {
     }
 
     @DeleteMapping("/allergy")
-    public ResponseEntity<AllergicReaction> deleteAllergyReaction(@RequestParam Long id) {
+    public ResponseEntity<AllergicReaction> deleteAllergicReaction(@RequestParam Long id) {
         Optional<AllergicReaction> deletedAllergyReaction = petAllergyTrackerService.deleteAllergicReaction(id);
         return deletedAllergyReaction.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/allergies")
-    public void deleteAllAllergyReactions() {
+    public void deleteAllAllergicReactions() {
         petAllergyTrackerService.deleteAllAllergicReactions();
     }
 
+
     @GetMapping("/commonallergens")
     public ResponseEntity<List<String>> getCommonAllergens() {
-        List<String> commonAllergens = petAllergyTrackerService.identifyCommonAllergens();
+        List<String> commonAllergens = petAllergyTrackerService.getCommonAllergens();
 
         if (!commonAllergens.isEmpty()) {
             return new ResponseEntity<List<String>>(commonAllergens, HttpStatus.OK);
@@ -162,6 +165,24 @@ public class PetAllergyTrackerController {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
     }
+
+
+    /*
+     * ******** CRUD using AllergyListRepository *********
+     * */
+    @GetMapping("/allergylist")
+    public ResponseEntity<List<AllergyList>> getAllergyList() {
+        List<AllergyList> allergyList = petAllergyTrackerService.getAllergyList();
+
+        if (!allergyList.isEmpty()) {
+            return new ResponseEntity<List<AllergyList>>(allergyList, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+    }
+
+
+
 
     //    /**
 //     * Endpoint to retrieve common allergens based on recorded allergic reactions.

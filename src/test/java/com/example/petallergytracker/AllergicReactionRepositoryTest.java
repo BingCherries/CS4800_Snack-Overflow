@@ -1,7 +1,7 @@
 package com.example.petallergytracker;
 
 import com.example.petallergytracker.Models.AllergicReaction;
-import com.example.petallergytracker.Models.Ingredient;
+import com.example.petallergytracker.Models.Food;
 import com.example.petallergytracker.Repository.AllergicReactionRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +28,8 @@ public class AllergicReactionRepositoryTest {
 
     @Test
     void givenNewAllergicReaction_whenSave_thenSuccess() {
-        Ingredient ingredient = new Ingredient("Food1", Arrays.asList("Milk", "Cheese", "etc"));
-        AllergicReaction newAllergicReaction = new AllergicReaction(ingredient, "vomit", 4);
+        Food food = new Food("Food1", Arrays.asList("Milk", "Cheese", "etc"));
+        AllergicReaction newAllergicReaction = new AllergicReaction(food, "vomit", 4);
         AllergicReaction insertedAllergicReaction = allergicReactionRepository.save(newAllergicReaction);
         assertThat(entityManager.find(AllergicReaction.class, insertedAllergicReaction.getId())).isEqualTo(newAllergicReaction);
     }
@@ -52,8 +52,8 @@ public class AllergicReactionControllerTest {
 
     @Test
     void givenNewAllergicReaction_whenSave_thenSuccess() throws Exception {
-        Ingredient ingredient = new Ingredient("Food1", Arrays.asList("Milk", "Cheese", "etc"));
-        AllergicReaction newAllergicReaction = new AllergicReaction(ingredient, "vomit", 4);
+        Food food = new Food("Food1", Arrays.asList("Milk", "Cheese", "etc"));
+        AllergicReaction newAllergicReaction = new AllergicReaction(food, "vomit", 4);
 
         mockMvc.perform(post("/api/allergies")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -65,8 +65,8 @@ public class AllergicReactionControllerTest {
 
     @Test
     void givenExistingPetName_whenGetAllergiesByPetName_thenSuccess() throws Exception {
-        Ingredient ingredient = new Ingredient("Food1", Arrays.asList("Milk", "Cheese", "etc"));
-        AllergicReaction newAllergicReaction = new AllergicReaction(ingredient, "vomit", 4);
+        Food food = new Food("Food1", Arrays.asList("Milk", "Cheese", "etc"));
+        AllergicReaction newAllergicReaction = new AllergicReaction(food, "vomit", 4);
         allergicReactionRepository.save(newAllergicReaction);
 
         mockMvc.perform(get("/api/allergies/{petName}", "Buddy")
