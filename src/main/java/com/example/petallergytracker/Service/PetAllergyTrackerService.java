@@ -103,7 +103,7 @@ public class PetAllergyTrackerService {
 
     public List<String> getCommonAllergens() {
         final int threshold = 5; // Threshold can be adjusted based on needs
-        return allergicReactionRepository.findComponentsAppearingMoreThan(threshold);
+        return allergicReactionRepository.findIngredientsAppearingMoreThan(threshold);
     }
 
     public List<AllergyList> getAllergyList() {return allergyListRepository.findAll();}

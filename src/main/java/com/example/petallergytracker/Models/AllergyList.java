@@ -12,7 +12,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @NoArgsConstructor
 public class AllergyList {
     @Id
-
     private ObjectId id;
     private String classfication;
     private String type;

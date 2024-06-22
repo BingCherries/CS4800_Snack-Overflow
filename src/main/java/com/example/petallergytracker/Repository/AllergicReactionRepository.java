@@ -21,10 +21,10 @@ public interface AllergicReactionRepository extends MongoRepository<AllergicReac
     Optional<AllergicReaction> deleteAllergicReactionById(Long id);
 
     @Aggregation(pipeline = {
-            "{ '$unwind': '$ingredient.components' }",
-            "{ '$group': { '_id': '$ingredient.components', 'count': { '$sum': 1 } } }",
+            "{ '$unwind': '$food.ingredients' }",
+            "{ '$group': { '_id': '$food.ingredients', 'count': { '$sum': 1 } } }",
             "{ '$match': { 'count': { '$gt': ?0 } } }",
-            "{ '$project': { '_id': 0, 'component': '$_id' } }"
+            "{ '$project': { '_id': 0, 'ingredient': '$_id' } }"
     })
-    List<String> findComponentsAppearingMoreThan(int count);
+    List<String> findIngredientsAppearingMoreThan(int count);
 }

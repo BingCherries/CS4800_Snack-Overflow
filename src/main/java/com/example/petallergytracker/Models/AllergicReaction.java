@@ -8,8 +8,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * Entity representing an allergic reaction to a specific ingredient.
  * Stores details about the reaction including symptoms, severity, and the ingredient involved.
  */
+//@Entity
 @Document(collection = "allergyreactions")
-@Entity
 @Data
 public class AllergicReaction {
     @Id
@@ -25,22 +25,22 @@ public class AllergicReaction {
 
     private int severity;  // Severity of the reaction, scaled 1-10
 
-    /**
-     * Default constructor for JPA.
-     */
-    public AllergicReaction() {}
-
-    /**
-     * Constructs a new Allergic Reaction with specified ingredient, symptoms, and severity.
-     * @param food The ingredient that caused the reaction.
-     * @param symptoms Descriptive symptoms of the allergic reaction.
-     * @param severity Severity level of the reaction.
-     */
-    public AllergicReaction(Food food, String symptoms, int severity) {
-        this.food = food;
-        this.symptoms = symptoms;
-        this.severity = severity;
-    }
+//    /**
+//     * Default constructor for JPA.
+//     */
+//    public AllergicReaction() {}
+//
+//    /**
+//     * Constructs a new Allergic Reaction with specified ingredient, symptoms, and severity.
+//     * @param food The ingredient that caused the reaction.
+//     * @param symptoms Descriptive symptoms of the allergic reaction.
+//     * @param severity Severity level of the reaction.
+//     */
+//    public AllergicReaction(Food food, String symptoms, int severity) {
+//        this.food = food;
+//        this.symptoms = symptoms;
+//        this.severity = severity;
+//    }
 
     @Override
     public boolean equals(Object o) {
