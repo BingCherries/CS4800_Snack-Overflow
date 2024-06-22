@@ -44,4 +44,16 @@ public class Food {
         this.name = name;
         this.ingredients = ingredients;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+        if (!(o instanceof Pet)) {
+            return false;
+        }
+        Food food = (Food) o;
+        return food.getId().equals(this.getId()) && food.getName().equals(this.getName()) && food.getIngredients().equals(this.getIngredients());
+    }
 }

@@ -41,5 +41,17 @@ public class AllergicReaction {
         this.symptoms = symptoms;
         this.severity = severity;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+        if (!(o instanceof Pet)) {
+            return false;
+        }
+        AllergicReaction allergicReaction = (AllergicReaction) o;
+        return allergicReaction.getId().equals(this.getId()) && allergicReaction.getFood().equals(this.getFood()) && allergicReaction.getSymptoms().equals(this.getSymptoms()) && allergicReaction.getSeverity() == this.getSeverity();
+    }
 }
 
