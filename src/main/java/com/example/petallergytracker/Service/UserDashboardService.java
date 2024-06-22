@@ -1,5 +1,6 @@
 package com.example.petallergytracker.Service;
 
+import com.example.petallergytracker.Models.DashboardData;
 import com.example.petallergytracker.Models.Food;
 import com.example.petallergytracker.Repository.AllergicReactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ public class UserDashboardService {
      * Retrieves a list of all ingredients logged by the user.
      * @return List of ingredient names.
      */
-    public List<String> getAllIngredients() {
+    public List<String> getAllFoods() {
         return petAllergyTrackerService.findAllFoods().stream()
                              .map(Food::getName)
                              .collect(Collectors.toList());
@@ -37,58 +38,32 @@ public class UserDashboardService {
      */
     public List<String> getAllergicReactionsSummary() {
         return allergicReactionRepository.findAll().stream()
-                                         .map(reaction -> "Ingredient: " + reaction.getFood().getName() +
-                                                          ", Symptoms: " + reaction.getSymptoms() +
-                                                          ", Severity: " + reaction.getSeverity())
+                                         .map(reaction -> "Food: " + reaction.getFood().getName() +
+                                                 ", Ingredients: " + reaction.getFood().getIngredients().toString() +
+                                                 ", Symptom: " + reaction.getSymptoms() +
+                                                 ", Severity: " + reaction.getSeverity())
                                          .collect(Collectors.toList());
     }
 
-//    /**
-//     * Retrieves a list of identified common allergens from the allergy service.
-//     * @return List of common allergens.
-//     */
-//    public List<String> getIdentifiedCommonAllergens() {
-//        return petAllergyTrackerService.identifyCommonAllergens();
-//    }
+    /**
+     * Retrieves a list of identified common allergens from the allergy service.
+     * @return List of common allergens.
+     */
+    public List<String> getIdentifiedCommonAllergens() {
+        return petAllergyTrackerService.getCommonAllergens();
+    }
 
     /**
      * Compiles and returns comprehensive dashboard data.
      * This method consolidates various data points for the user dashboard.
      * @return DashboardData containing all relevant information for the user.
      */
-//    public DashboardData getDashboardData() {
-//        List<String> ingredients = getAllIngredients();
-//        List<String> reactions = getAllergicReactionsSummary();
-//        List<String> commonAllergens = getIdentifiedCommonAllergens();
-//
-//        return new DashboardData(ingredients, reactions, commonAllergens);
-//    }
-}
+    public DashboardData getDashboardData() {
+        List<String> foods = getAllFoods();
+        List<String> reactions = getAllergicReactionsSummary();
+        List<String> commonAllergens = getIdentifiedCommonAllergens();
 
-/**
- * Simple POJO to hold and structure dashboard data.
- */
-class DashboardData {
-    private List<String> ingredients;
-    private List<String> reactions;
-    private List<String> commonAllergens;
-
-    public DashboardData(List<String> ingredients, List<String> reactions, List<String> commonAllergens) {
-        this.ingredients = ingredients;
-        this.reactions = reactions;
-        this.commonAllergens = commonAllergens;
-    }
-
-    // Getters
-    public List<String> getIngredients() {
-        return ingredients;
-    }
-
-    public List<String> getReactions() {
-        return reactions;
-    }
-
-    public List<String> getCommonAllergens() {
-        return commonAllergens;
+        return new DashboardData(foods, reactions, commonAllergens);
     }
 }
+
