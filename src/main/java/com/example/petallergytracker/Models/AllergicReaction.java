@@ -1,7 +1,13 @@
 package com.example.petallergytracker.Models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NonNull;
+import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
@@ -11,18 +17,23 @@ import org.springframework.data.mongodb.core.mapping.Document;
 //@Entity
 @Document(collection = "allergyreactions")
 @Data
+@AllArgsConstructor
+@Builder
 public class AllergicReaction {
     @Id
 //    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private ObjectId id;
 
 //    @ManyToOne(cascade = CascadeType.ALL)  // Many reactions can be associated with one ingredient
 //    @JoinColumn(name = "ingredient_id", nullable = false)  // Foreign key to Ingredient table
     private Food food;
 //
 //    @Column(length = 500)
+    @NotNull
+    @NotEmpty
     private String symptoms;  // Description of the allergic symptoms
 
+    @NotNull
     private int severity;  // Severity of the reaction, scaled 1-10
 
 //    /**

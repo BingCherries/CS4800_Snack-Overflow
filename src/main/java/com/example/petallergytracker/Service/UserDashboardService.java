@@ -26,7 +26,7 @@ public class UserDashboardService {
      * @return List of ingredient names.
      */
     public List<String> getAllFoods() {
-        return petAllergyTrackerService.findAllFoods().stream()
+        return petAllergyTrackerService.getAllFoods().stream()
                              .map(Food::getName)
                              .collect(Collectors.toList());
     }

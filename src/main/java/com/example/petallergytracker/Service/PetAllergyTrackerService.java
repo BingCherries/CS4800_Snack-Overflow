@@ -6,11 +6,13 @@ import com.example.petallergytracker.Models.Food;
 import com.example.petallergytracker.Repository.AllergyListRepository;
 import com.example.petallergytracker.Repository.FoodRepository;
 import com.example.petallergytracker.Repository.AllergicReactionRepository;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class PetAllergyTrackerService {
@@ -33,30 +35,37 @@ public class PetAllergyTrackerService {
     *
     * */
     public Food createFood(Food food) {
-        return foodRepository.save(food);
+        Food newFood = Food.builder()
+                .name(food.getName())
+                .ingredients(food.getIngredients())
+                .build();
+        return foodRepository.save(newFood);
     }
 
     public List<Food> createFoods(List<Food> foods) {
-        return foodRepository.saveAll(foods);
+        List<Food> newFoods = foods.stream()
+                .map(food -> Food.builder()
+                        .name(food.getName())
+                        .ingredients(food.getIngredients())
+                        .build())
+                .collect(Collectors.toList());
+
+        return foodRepository.saveAll(newFoods);
     }
 
-    public Optional<Food> findFood(Long foodId) {
+    public Optional<Food> getFood(ObjectId foodId) {
         return foodRepository.findById(foodId);
     }
 
-    public List<Food> findFoods(List<Long> foodIds) {
+    public List<Food> getFoods(List<ObjectId> foodIds) {
         return foodRepository.findAllById(foodIds);
     }
 
-    /**
-     * Retrieves all ingredients from the database.
-     * @return A list of all ingredients.
-     */
-    public List<Food> findAllFoods() {
+    public List<Food> getAllFoods() {
         return foodRepository.findAll();
     }
 
-    public Optional<Food> deleteFood(Long foodId) {
+    public Optional<Food> deleteFood(ObjectId foodId) {
         return foodRepository.deleteFoodById(foodId);
     }
 
@@ -70,30 +79,34 @@ public class PetAllergyTrackerService {
      * ****************** Implement CRUD for AllergicReactionRepository **************
      * */
     public AllergicReaction createAllergicReaction(AllergicReaction allergicReaction) {
-        return allergicReactionRepository.save(allergicReaction);
+        Optional<Food> mostRecentFood = getMostRecentFood();
+        if (!mostRecentFood.isPresent()) {
+            return null;
+        }
+
+        AllergicReaction newAllergicReaction = AllergicReaction.builder()
+                .food(mostRecentFood.get()).symptoms(allergicReaction.getSymptoms()).severity(allergicReaction.getSeverity()).build();
+
+        return allergicReactionRepository.save(newAllergicReaction);
     }
 
-    public List<AllergicReaction> createAllergicReactions(List<AllergicReaction> allergicReactions) {
-        return allergicReactionRepository.saveAll(allergicReactions);
-    }
+//    public List<AllergicReaction> createAllergicReactions(List<AllergicReaction> allergicReactions) {
+//        return allergicReactionRepository.saveAll(allergicReactions);
+//    }
 
-    public Optional<AllergicReaction> getAllergicReaction(Long allergicReactionId) {
+    public Optional<AllergicReaction> getAllergicReaction(ObjectId allergicReactionId) {
         return allergicReactionRepository.findById(allergicReactionId);
     }
 
-    public List<AllergicReaction> getAllergicReactions(List<Long> allergicReactionIds) {
+    public List<AllergicReaction> getAllergicReactions(List<ObjectId> allergicReactionIds) {
         return allergicReactionRepository.findAllById(allergicReactionIds);
     }
 
-    /**
-     * Retrieves all ingredients from the database.
-     * @return A list of all ingredients.
-     */
     public List<AllergicReaction> getAllAllergicReactions() {
         return allergicReactionRepository.findAll();
     }
 
-    public Optional<AllergicReaction> deleteAllergicReaction(Long allergicReactionId) {
+    public Optional<AllergicReaction> deleteAllergicReaction(ObjectId allergicReactionId) {
         return allergicReactionRepository.deleteAllergicReactionById(allergicReactionId);
     }
 
@@ -107,6 +120,15 @@ public class PetAllergyTrackerService {
     }
 
     public List<AllergyList> getAllergyList() {return allergyListRepository.findAll();}
+
+    /*
+    *
+    * inner functions
+    *
+    * */
+    private Optional<Food> getMostRecentFood() {
+        return foodRepository.findFirstByOrderByIdDesc();
+    }
 
     //    /**
 //     * Identifies common allergens based on the number of allergic reactions recorded.

@@ -5,7 +5,10 @@ import jakarta.persistence.Id;
 
 import java.util.List;
 import jakarta.persistence.ElementCollection;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
+import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
@@ -16,15 +19,20 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "food")
 @Data
 @AllArgsConstructor
+@Builder
 public class Food {
     @Id  // Marks the id field as the primary key of the entity.
 //    @GeneratedValue(strategy = GenerationType.AUTO)  // Configures the way of increment of the specified column(field).
-    private Long id;  // Unique identifier for each ingredient.
+    private ObjectId id;  // Unique identifier for each ingredient.
 
+    @NotNull
+    @NotEmpty
     private String name;  // Name of the ingredient.
 
 //    @ElementCollection  // This annotation is used to define a collection of instances of a basic type or embeddable class.
 //    @ElementCollection
+    @NotNull
+    @NotEmpty
     private List<String> ingredients;  // List of components that make up the ingredient.
 
 //    /**

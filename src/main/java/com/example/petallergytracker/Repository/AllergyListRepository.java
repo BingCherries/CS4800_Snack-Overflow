@@ -2,7 +2,10 @@ package com.example.petallergytracker.Repository;
 
 import com.example.petallergytracker.Models.AllergyList;
 
+import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Repository;
 
-public interface AllergyListRepository extends MongoRepository<AllergyList, Long> {
+@Repository
+public interface AllergyListRepository extends MongoRepository<AllergyList, ObjectId> {
 }

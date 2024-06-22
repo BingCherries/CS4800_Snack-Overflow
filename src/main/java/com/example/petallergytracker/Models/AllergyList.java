@@ -16,5 +16,6 @@ public class AllergyList {
     private String classfication;
     private String type;
     private String group;
+    private String food;
     private String allergy;
 }

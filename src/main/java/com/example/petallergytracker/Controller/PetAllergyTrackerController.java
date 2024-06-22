@@ -4,6 +4,8 @@ import com.example.petallergytracker.Models.AllergicReaction;
 import com.example.petallergytracker.Models.AllergyList;
 import com.example.petallergytracker.Models.Food;
 import com.example.petallergytracker.Service.PetAllergyTrackerService;
+import jakarta.validation.Valid;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +29,7 @@ public class PetAllergyTrackerController {
     * ******** CRUD using foodRepository *********
     * */
     @PostMapping("/food")
-    public ResponseEntity<Food> createFood(@RequestBody Food food) {
+    public ResponseEntity<Food> createFood(@Valid @RequestBody Food food) {
         Food newFood = petAllergyTrackerService.createFood(food);
 
         if (newFood != null) {
@@ -38,7 +40,7 @@ public class PetAllergyTrackerController {
     }
 
     @PostMapping("/foods")
-    public ResponseEntity<List<Food>> createFoods(@RequestBody List<Food> foods) {
+    public ResponseEntity<List<Food>> createFoods(@Valid @RequestBody List<Food> foods) {
         List<Food> newFoods = petAllergyTrackerService.createFoods(foods);
 
         if (!newFoods.isEmpty()) {
@@ -49,14 +51,14 @@ public class PetAllergyTrackerController {
     }
 
     @GetMapping("/food")
-    public ResponseEntity<Food> getFood(@RequestParam Long id) {
-        Optional<Food> food = petAllergyTrackerService.findFood(id);
+    public ResponseEntity<Food> getFood(@RequestParam ObjectId id) {
+        Optional<Food> food = petAllergyTrackerService.getFood(id);
         return food.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
     @GetMapping("/foods")
     public ResponseEntity<List<Food>> getAllFoods() {
-        List<Food> foods = petAllergyTrackerService.findAllFoods();
+        List<Food> foods = petAllergyTrackerService.getAllFoods();
 
         if (!foods.isEmpty()) {
             return new ResponseEntity<List<Food>>(foods, HttpStatus.OK);
@@ -66,8 +68,8 @@ public class PetAllergyTrackerController {
     }
 
     @GetMapping("/foods/byIds")
-    public ResponseEntity<List<Food>> getFoods(@RequestParam List<Long> ids) {
-        List<Food> foods = petAllergyTrackerService.findFoods(ids);
+    public ResponseEntity<List<Food>> getFoods(@RequestParam List<ObjectId> ids) {
+        List<Food> foods = petAllergyTrackerService.getFoods(ids);
 
         if (!foods.isEmpty()) {
             return new ResponseEntity<List<Food>>(foods, HttpStatus.OK);
@@ -77,7 +79,7 @@ public class PetAllergyTrackerController {
     }
 
     @DeleteMapping("/food")
-    public ResponseEntity<Food> deleteFood(@RequestParam Long id) {
+    public ResponseEntity<Food> deleteFood(@RequestParam ObjectId id) {
         Optional<Food> deletedFood = petAllergyTrackerService.deleteFood(id);
         return deletedFood.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
@@ -92,7 +94,7 @@ public class PetAllergyTrackerController {
      * ******** CRUD using AllergyReactionRepository *********
      * */
     @PostMapping("/allergy")
-    public ResponseEntity<AllergicReaction> createAllergicReaction(@RequestBody AllergicReaction allergicReaction) {
+    public ResponseEntity<AllergicReaction> createAllergicReaction(@Valid @RequestBody AllergicReaction allergicReaction) {
         AllergicReaction newAllergicReaction = petAllergyTrackerService.createAllergicReaction(allergicReaction);
 
         if (newAllergicReaction != null) {
@@ -102,19 +104,19 @@ public class PetAllergyTrackerController {
         }
     }
 
-    @PostMapping("/allergies")
-    public ResponseEntity<List<AllergicReaction>> createAllergicReactions(@RequestBody List<AllergicReaction> allergicReactions) {
-        List<AllergicReaction> newAllergicReactions = petAllergyTrackerService.createAllergicReactions(allergicReactions);
-
-        if (!newAllergicReactions.isEmpty()) {
-            return new ResponseEntity<List<AllergicReaction>>(newAllergicReactions, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
+//    @PostMapping("/allergies")
+//    public ResponseEntity<List<AllergicReaction>> createAllergicReactions(@Valid @RequestBody List<AllergicReaction> allergicReactions) {
+//        List<AllergicReaction> newAllergicReactions = petAllergyTrackerService.createAllergicReactions(allergicReactions);
+//
+//        if (!newAllergicReactions.isEmpty()) {
+//            return new ResponseEntity<List<AllergicReaction>>(newAllergicReactions, HttpStatus.OK);
+//        } else {
+//            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+//        }
+//    }
 
     @GetMapping("/allergy")
-    public ResponseEntity<AllergicReaction> getAllergicReaction(@RequestParam Long id) {
+    public ResponseEntity<AllergicReaction> getAllergicReaction(@RequestParam ObjectId id) {
         Optional<AllergicReaction> allergicReaction = petAllergyTrackerService.getAllergicReaction(id);
         return allergicReaction.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
@@ -132,7 +134,7 @@ public class PetAllergyTrackerController {
     }
 
     @GetMapping("/allergies/byIds")
-    public ResponseEntity<List<AllergicReaction>> getAllergicReactions(@RequestParam List<Long> ids) {
+    public ResponseEntity<List<AllergicReaction>> getAllergicReactions(@RequestParam List<ObjectId> ids) {
         List<AllergicReaction> allergicReactions = petAllergyTrackerService.getAllergicReactions(ids);
 
         if (!allergicReactions.isEmpty()) {
@@ -143,7 +145,7 @@ public class PetAllergyTrackerController {
     }
 
     @DeleteMapping("/allergy")
-    public ResponseEntity<AllergicReaction> deleteAllergicReaction(@RequestParam Long id) {
+    public ResponseEntity<AllergicReaction> deleteAllergicReaction(@RequestParam ObjectId id) {
         Optional<AllergicReaction> deletedAllergyReaction = petAllergyTrackerService.deleteAllergicReaction(id);
         return deletedAllergyReaction.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
