@@ -23,39 +23,85 @@ form {
 
 form label {
     margin-right: 10px;
+    display: block;
 }
 
-form input {
-    margin-right: 10px;
+form input, form select {
+    margin-bottom: 10px;
+    padding: 5px;
+    width: 100%;
+    max-width: 300px;
 }
 
 button {
     padding: 5px 10px;
+    margin-top: 10px;
 }
 
-.notes-container {
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.validation-message {
+    color: red;
+    margin-top: 10px;
+}
+
+.ingredients-container {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
     margin-top: 20px;
 }
 
-.note {
+.ingredient-note {
     background-color: #f9f9a9;
     border: 1px solid #ccc;
     padding: 10px;
-    width: 150px;
+    width: 200px;
     box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
+    display: flex;
+    flex-direction: column;
 }
 
-.search-bar {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    padding: 10px;
-    width: 100%;
-    max-width: 300px;
+.delete-confirmation {
+    background-color: rgba(255, 255, 255, 0.9);
     border: 1px solid #ccc;
-    border-radius: 4px;
-    margin-left:20px;
+    padding: 20px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: center;
+}
+
+.delete-confirmation p {
+    margin-bottom: 10px;
+}
+
+.edit-modal {
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.edit-modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center;
 }
