@@ -167,6 +167,17 @@ public class PetAllergyTrackerController {
         }
     }
 
+    @GetMapping("/allergyalert")
+    public ResponseEntity<List<String>> getAllergyAlert(@RequestParam ObjectId id) {
+        List<String> allergyAlert = petAllergyTrackerService.getAllergyAlert(id);
+
+        if (!allergyAlert.isEmpty()) {
+            return new ResponseEntity<List<String>>(allergyAlert, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+    }
+
 
     /*
      * ******** CRUD using AllergyListRepository *********
