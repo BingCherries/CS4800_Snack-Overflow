@@ -6,12 +6,12 @@ import com.example.petallergytracker.Models.Food;
 import com.example.petallergytracker.Repository.AllergyListRepository;
 import com.example.petallergytracker.Repository.FoodRepository;
 import com.example.petallergytracker.Repository.AllergicReactionRepository;
+import jakarta.validation.constraints.Null;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -117,6 +117,30 @@ public class PetAllergyTrackerService {
     public List<String> getCommonAllergens() {
         final int threshold = 5; // Threshold can be adjusted based on needs
         return allergicReactionRepository.findIngredientsAppearingMoreThan(threshold);
+    }
+
+    public List<String> getAllergyAlert(ObjectId id) {
+        Optional<Food> food = foodRepository.findById(id);
+        if (!food.isPresent()) {
+            return null;
+        }
+
+        List<String> commonAllergens = getCommonAllergens();
+        if (commonAllergens.isEmpty()) {
+            return commonAllergens;
+        }
+
+        Set<String> commonAllergensSet = new HashSet<>(getCommonAllergens());
+
+        List<String> ingredients = food.get().getIngredients();
+        List<String> allergyAlert = new ArrayList<>();
+
+        for (String ingredient : ingredients) {
+            if (commonAllergensSet.contains(ingredient)) {
+                allergyAlert.add(ingredient);
+            }
+        }
+        return allergyAlert;
     }
 
     public List<AllergyList> getAllergyList() {return allergyListRepository.findAll();}
