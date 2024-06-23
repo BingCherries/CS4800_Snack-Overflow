@@ -5,13 +5,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.concurrent.Executor;
 
 @SpringBootApplication // This annotation denotes a configuration class that declares one or more @Bean methods and
 // also triggers autoconfiguration and component scanning.
-@EnableAsync  // Enables Spring's asynchronous method execution capability.
-
+//@EnableAsync  // Enables Spring's asynchronous method execution capability.
 public class PetAllergyTrackerApplication {
 
     public static void main(String[] args) {
