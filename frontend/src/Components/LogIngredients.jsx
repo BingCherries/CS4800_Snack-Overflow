@@ -4,72 +4,159 @@ import React, { useState } from 'react';
 function LogIngredients() {
     const [ingredient, setIngredient] = useState('');
     const [date, setDate] = useState('');
-    const [loggedItems, setLoggedItems] = useState([]);
-    const [searchQuery, setSearchQuery] = useState('');
+    const [loggedIngredients, setLoggedIngredients] = useState([]);
+    const [editIndex, setEditIndex] = useState(null);
+    const [showValidationMessage, setShowValidationMessage] = useState(false);
+    const [searchTerm, setSearchTerm] = useState('');
+    const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(null);
+    const [showEditModal, setShowEditModal] = useState(false);
 
     const handleSubmit = (event) => {
         event.preventDefault();
         if (ingredient && date) {
-            const newItem = { ingredient, date };
-            setLoggedItems([...loggedItems, newItem]);
+            setLoggedIngredients([...loggedIngredients, { ingredient, date }]);
             setIngredient('');
             setDate('');
+            setShowValidationMessage(false);
+        } else {
+            setShowValidationMessage(true);
         }
     };
 
     const handleSearch = (event) => {
-        setSearchQuery(event.target.value);
+        setSearchTerm(event.target.value);
     };
 
-    const filteredItems = loggedItems.filter(item =>
-        item.ingredient.toLowerCase().includes(searchQuery.toLowerCase())
+    const filteredIngredients = loggedIngredients.filter(log =>
+        log.ingredient.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        log.date.toLowerCase().includes(searchTerm.toLowerCase())
     );
+
+    const openEditModal = (index) => {
+        setEditIndex(index);
+        setIngredient(loggedIngredients[index].ingredient);
+        setDate(loggedIngredients[index].date);
+        setShowEditModal(true);
+    };
+
+    const closeEditModal = () => {
+        setShowEditModal(false);
+        setEditIndex(null);
+        setIngredient('');
+        setDate('');
+    };
+
+    const handleEditSubmit = (event) => {
+        event.preventDefault();
+        if (ingredient && date) {
+            const updatedIngredients = [...loggedIngredients];
+            updatedIngredients[editIndex] = { ingredient, date };
+            setLoggedIngredients(updatedIngredients);
+            closeEditModal();
+        }
+    };
+
+    const handleDelete = (index) => {
+        setShowDeleteConfirmation(index);
+    };
+
+    const confirmDelete = (index) => {
+        setLoggedIngredients(loggedIngredients.filter((_, i) => i !== index));
+        setShowDeleteConfirmation(null);
+    };
+
+    const cancelDelete = () => {
+        setShowDeleteConfirmation(null);
+    };
 
     return (
         <div>
-            <h1>Log New Ingredients</h1>
+            <h1>Log Ingredients</h1>
             <form onSubmit={handleSubmit}>
-                <label htmlFor="ingredientName">Ingredient Name:</label>
+                <label htmlFor="ingredient">Ingredient:</label>
                 <input
                     type="text"
-                    id="ingredientName"
-                    name="ingredientName"
+                    id="ingredient"
+                    name="ingredient"
                     value={ingredient}
                     onChange={(e) => setIngredient(e.target.value)}
                     required
                 />
-                <label htmlFor="ingredientDate">Date:</label>
+                <label htmlFor="date">Date:</label>
                 <input
                     type="date"
-                    id="ingredientDate"
-                    name="ingredientDate"
+                    id="date"
+                    name="date"
                     value={date}
                     onChange={(e) => setDate(e.target.value)}
                     required
                 />
                 <button type="submit">Log Ingredient</button>
+                {showValidationMessage && (
+                    <p className="validation-message">*Please make sure all fields are completed</p>
+                )}
             </form>
-            
-            <h2>Logged Ingredients:</h2>
-            <div>
+
+            <h2>Search Ingredients:</h2>
             <input
                 type="text"
                 placeholder="Search ingredients..."
-                value={searchQuery}
+                value={searchTerm}
                 onChange={handleSearch}
-                className="search-bar"
             />
-            </div>
-            <div className="notes-container">
-                {filteredItems.map((item, index) => (
-                    <div key={index} className="note">
-                        <p><strong>Ingredient:</strong> {item.ingredient}</p>
-                        <p><strong>Date:</strong> {item.date}</p>
+
+            <h2>Logged Ingredients:</h2>
+            <div className="ingredients-container">
+                {filteredIngredients.map((log, index) => (
+                    <div key={index} className="ingredient-note">
+                        <p><strong>Ingredient:</strong> {log.ingredient}</p>
+                        <p><strong>Date:</strong> {log.date}</p>
+                        <button onClick={() => openEditModal(index)}>Edit</button>
+                        <button onClick={() => handleDelete(index)}>Delete</button>
                     </div>
                 ))}
             </div>
+
+            {showDeleteConfirmation !== null && (
+                <div className="delete-confirmation">
+                    <p>Are you sure you want to delete this note?</p>
+                    <button onClick={() => confirmDelete(showDeleteConfirmation)}>Yes</button>
+                    <button onClick={cancelDelete}>No</button>
+                </div>
+            )}
+
+            {showEditModal && (
+                <div className="edit-modal">
+                    <div className="edit-modal-content">
+                        <h2>Edit Ingredient</h2>
+                        <form onSubmit={handleEditSubmit}>
+                            <label htmlFor="editIngredient">Ingredient:</label>
+                            <input
+                                type="text"
+                                id="editIngredient"
+                                name="editIngredient"
+                                value={ingredient}
+                                onChange={(e) => setIngredient(e.target.value)}
+                                required
+                            />
+                            <label htmlFor="editDate">Date:</label>
+                            <input
+                                type="date"
+                                id="editDate"
+                                name="editDate"
+                                value={date}
+                                onChange={(e) => setDate(e.target.value)}
+                                required
+                            />
+                            <button type="submit">Save Changes</button>
+                            <button type="button" onClick={closeEditModal}>Cancel</button>
+                        </form>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
 
 export default LogIngredients;
+
