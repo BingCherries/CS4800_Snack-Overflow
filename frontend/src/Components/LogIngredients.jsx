@@ -6,21 +6,16 @@ function LogIngredients() {
     const [date, setDate] = useState('');
     const [loggedIngredients, setLoggedIngredients] = useState([]);
     const [editIndex, setEditIndex] = useState(null);
-    const [showValidationMessage, setShowValidationMessage] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
     const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(null);
     const [showEditModal, setShowEditModal] = useState(false);
+    const [showToast, setShowToast] = useState(false);
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        if (ingredient && date) {
-            setLoggedIngredients([...loggedIngredients, { ingredient, date }]);
-            setIngredient('');
-            setDate('');
-            setShowValidationMessage(false);
-        } else {
-            setShowValidationMessage(true);
-        }
+        setLoggedIngredients([...loggedIngredients, { ingredient, date }]);
+        setIngredient('');
+        setDate('');
     };
 
     const handleSearch = (event) => {
@@ -48,12 +43,12 @@ function LogIngredients() {
 
     const handleEditSubmit = (event) => {
         event.preventDefault();
-        if (ingredient && date) {
-            const updatedIngredients = [...loggedIngredients];
-            updatedIngredients[editIndex] = { ingredient, date };
-            setLoggedIngredients(updatedIngredients);
-            closeEditModal();
-        }
+        const updatedIngredients = [...loggedIngredients];
+        updatedIngredients[editIndex] = { ingredient, date };
+        setLoggedIngredients(updatedIngredients);
+        closeEditModal();
+        setShowToast(true);
+        setTimeout(() => setShowToast(false), 500);
     };
 
     const handleDelete = (index) => {
@@ -92,9 +87,6 @@ function LogIngredients() {
                     required
                 />
                 <button type="submit">Log Ingredient</button>
-                {showValidationMessage && (
-                    <p className="validation-message">*Please make sure all fields are completed</p>
-                )}
             </form>
 
             <h2>Search Ingredients:</h2>
@@ -154,9 +146,14 @@ function LogIngredients() {
                     </div>
                 </div>
             )}
+
+            {showToast && (
+                <div className="toast">
+                    <p className='toast-msg'>Changes Saved</p>
+                </div>
+            )}
         </div>
     );
 }
 
 export default LogIngredients;
-

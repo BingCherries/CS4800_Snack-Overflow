@@ -26,7 +26,7 @@ form label {
     display: block;
 }
 
-form input, form select {
+form input, form select, form textarea {
     margin-bottom: 10px;
     padding: 5px;
     width: 100%;
@@ -104,4 +104,24 @@ button:disabled {
     box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
     width: 300px;
     text-align: center;
+}
+
+.toast {
+    position: fixed; /* Keeps the toast in a fixed position relative to the viewport */
+    top: 50%; /* Positions the toast 50% from the top of the viewport */
+    left: 50%; /* Positions the toast 50% from the left of the viewport */
+    transform: translate(-50%, -50%); /* Centers the toast horizontally and vertically */
+    background-color: #decfcf; /* Sets the background color of the toast to a dark grey */
+    color: #060606; /* Sets the text color to white */
+    padding: 10px; /* Adds padding inside the toast */
+    border-radius: 5px; /* Rounds the corners of the toast */
+    z-index: 1000; /* Ensures the toast is on top of other elements */
+    width: 200px; /* Set a specific width */
+    height: 50px; /* Set a specific height */
+    opacity: 0.6;
+
+}
+.toast-msg{
+    margin-left: 33px;
+    margin-top: 3.5px;
 }
