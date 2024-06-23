@@ -1,0 +1,83 @@
+.signupform {
+  background-color: white;
+  width: 50%;
+  margin: 100px auto;
+  /* margin in top and bottom will be 50px  */
+  /* left and right auto  */
+
+  padding-bottom: 280px;
+  padding-left: 90px;
+  padding-right: 90px;
+  border-radius: 15px;
+  box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.065);
+
+  /* horizon offset vertical offset blur offset  */
+  /* opacity of shadow */
+  /* red, green, blue, and (opacity ). */
+}
+.have-account{
+  margin-right: 180px;
+  padding-top:15px;
+}
+.welcome_safepaws{
+  margin-left: 130px;
+  font-size:35px;
+}
+.signup-title{
+  padding-left:180px;
+  margin-left: 40px;
+  padding-top:100px;
+  font-size: 50px;
+}
+.signup-line{
+margin-left: 160px;
+font-size:20px;
+
+}
+.form-group{
+  margin-top:90px;
+  padding-left:55px;
+}
+
+.btn-location{
+  margin-top: 78px;
+}
+.email-signup-form{
+  border-radius: 10px;
+  width:90%;
+  margin: 8px 0;
+  font-size:19px;
+}
+
+.password-signup-form{
+  border-radius: 10px;
+  font-size:19px;
+  width:90%;
+}
+
+.addUserForm .inputGroup {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.addUserForm .inputGroup label {
+  margin-top: 10px;
+}
+
+.addUserForm .inputGroup input {
+  margin-top: 5px;
+  padding: 10px;
+}
+
+.inputGroup button {
+  margin-top: 10px;
+}
+
+.addUser h3 {
+  text-align: center;
+  font-weight: bold;
+  color: darkcyan;
+  text-transform: uppercase;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+}

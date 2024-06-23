@@ -1,0 +1,65 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+.logo {
+    font-size: 1.5em;
+    margin: 20px;
+}
+
+nav ul {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+}
+
+nav ul li {
+    margin-right: 20px;
+}
+
+form {
+    margin-top: 20px;
+}
+
+form label {
+    margin-right: 10px;
+    display: block;
+}
+
+form input, form select {
+    margin-bottom: 10px;
+    padding: 5px;
+    width: 100%;
+    max-width: 300px;
+}
+
+.reaction-btn {
+    padding: 5px 10px;
+    margin-top: 10px;
+}
+
+.reaction-btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.validation-message {
+    color: red;
+    margin-top: 10px;
+}
+
+.reactions-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.reaction-note {
+    background-color: #f9f9a9;
+    border: 1px solid #ccc;
+    padding: 10px;
+    width: 200px;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
