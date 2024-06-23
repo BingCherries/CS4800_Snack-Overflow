@@ -5,6 +5,7 @@ import About from "./Components/About"
 import Signup from "./Components/Signup"
 import LogIngredients from './Components/LogIngredients';
 import RecordReactions from './Components/RecordReactions';
+import Dashboard from './Components/Dashboard';
 import { Route, Routes } from "react-router-dom"
 import "./CSS/App.css"
 import "./CSS/login.css"
@@ -24,6 +25,7 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/log_ingredients" element={<LogIngredients />} />
           <Route path="/record_reactions" element={<RecordReactions />} />
+          <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
       </div>
     </>

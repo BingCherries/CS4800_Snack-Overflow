@@ -13,7 +13,7 @@ import List from "@mui/material/List";
 import HomeIcon from '@mui/icons-material/Home';
 import InfoIcon from '@mui/icons-material/Info';
 import LoginIcon from '@mui/icons-material/Login';
-import PhoneRoundedIcon from '@mui/icons-material/HowToReg';
+import SignupIcon from '@mui/icons-material/HowToReg';
 import {Link, useMatch, useResolvedPath} from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 
@@ -34,7 +34,7 @@ export default function Navbar(){
     },
     {
       text: "Signup",
-      icon: <PhoneRoundedIcon />,
+      icon: <SignupIcon />,
     },
   ];
   return (
@@ -47,6 +47,7 @@ export default function Navbar(){
   <NavLink to="/about" className="nav-link" activeClassName="active">About us</NavLink>
   <NavLink to="/log_ingredients" className="nav-link" activeClassName="active">Log Ingredients</NavLink>
   <NavLink to="/record_reactions" className="nav-link" activeClassName="active">Record Reactions</NavLink>
+  <NavLink to="/dashboard" className="nav-link" activeClassName="active">Dashboard</NavLink>
   <NavLink to="/login" className="nav-link" activeClassName="active">Log in</NavLink>
   <NavLink to="/signup" ><button className="primary-button">Sign up</button></NavLink> 
 </div>
