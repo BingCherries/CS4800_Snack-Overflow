@@ -13,7 +13,7 @@
 }
 
 .have-account{
-  margin-right: 180px;
+  margin-right: 160px;
   padding-top:15px;
 }
 .welcome_safepaws{
@@ -36,20 +36,27 @@ font-size:20px;
   margin-top:90px;
   padding-left:55px;
 }
-
+.signup-btn{
+  border-radius: 10px;
+  width: 170px;
+  font-size: 18px;
+  padding: 10px 24px;
+  margin-left: 10px;
+}
 .btn-location{
   margin-top: 78px;
+  margin-left: 40px;
 }
 .email-signup-form{
   border-radius: 10px;
-  width:300px;
-  font-size:19px;
+  font-size: 19px;
+  width: 300px;
 }
 
 .password-signup-form{
   border-radius: 10px;
-  font-size:19px;
-  width:400px;
+  font-size: 19px;
+  width: 300px;
 }
 
 .addUserForm .inputGroup {
@@ -66,7 +73,10 @@ font-size:20px;
   margin-top: 5px;
   padding: 10px;
 }
-
+.inputGroup input{
+  margin-top: 5px;
+  padding: 10px;
+}
 .inputGroup button {
   margin-top: 10px;
 }
