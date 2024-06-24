@@ -70,7 +70,9 @@ function LogIngredients() {
             {/* Side Area with User Input Fields */}
             <div className="side-area">
                 <h1 className='log_ingre_title'>Log Ingredients</h1>
+                
                 <label htmlFor="search_bar">Search Ingredients:</label>
+                <br></br>
                 <input
                     className='ingre_search'
                     type="text"
@@ -89,7 +91,7 @@ function LogIngredients() {
                         onChange={(e) => setIngredient(e.target.value)}
                         required
                     /><br></br>
-                    <label htmlFor="date">Date:</label><br></br>
+                    <label htmlFor="date">Date:</label>
                     <input
                         className='ingredient_date_input'
                         type="date"

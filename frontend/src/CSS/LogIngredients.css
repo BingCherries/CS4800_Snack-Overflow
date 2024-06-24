@@ -96,20 +96,20 @@
 }
 .ingredient_form_input{
  border-radius: 10px;
-  width:90%;
+  width:300px;
   margin: 8px 0;
   font-size:19px;
 }
 .ingredient_date_input{
   border-radius: 10px;
-  width:90%;
+  width:300px;
   margin: 8px 0;
   font-size:19px;
 }
 .ingre_search{
     border-radius: 10px;
-    width:90%;
-    margin: 8px 0;
+    width:300px;
+    margin: 9px 0;
     font-size:19px;
 }
 
@@ -179,4 +179,29 @@
 }
 .no-btn:hover{
     color:#808080;
+}
+/* Responsive Media Query */
+@media (max-width: 768px) {
+    .log-ingredients-container {
+        flex-direction: column;
+    }
+
+    .side-area {
+        width: 100%;
+    }
+
+    .main-area {
+        width: 100%;
+    }
+
+    .log_submit_btn {
+        width: 90%;
+        margin-left: 0;
+    }
+
+    .yes-btn, .no-btn {
+        margin-left: 0;
+        margin-right: 0;
+        width: 45%;
+    }
 }

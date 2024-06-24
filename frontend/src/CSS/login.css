@@ -1,6 +1,6 @@
 .loginform {
   background-color: white;
-  width: 50%;
+  width: 700px;
   margin: 100px auto;
   /* margin in top and bottom will be 50px  */
   /* left and right auto  */
@@ -11,9 +11,6 @@
   border-radius: 15px;
   box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.065);
 
-  /* horizon offset vertical offset blur offset  */
-  /* opacity of shadow */
-  /* red, green, blue, and (opacity ). */
 }
 .no-account{
   padding-top:15px;
@@ -21,8 +18,8 @@
 }
 
 .login-title{
-  padding-left:200px;
-  margin-left:45px;
+  padding-left:150px;
+  margin-left:35px;
   padding-top:100px;
   font-size: 50px;
 }
@@ -32,10 +29,10 @@
 }
 .login-btn{
   border-radius: 10px;
-  width:45%;
+  width:170px;
   font-size:18px;
   padding: 10px 24px;
-  margin-left: 100px;
+  margin-left: 10px;
 }
 .login-btn:hover{
   background:rgb(184, 184, 203);
@@ -43,7 +40,7 @@
 }
 .welcome-login{
   padding-top:35px;
-  margin-left:180px;
+  margin-left:120px;
   font-size:2.5rem;
 }
 .btn-location{
@@ -52,19 +49,19 @@
 }
 .email-login-form{
   border-radius: 10px;
-  width:90%;
-  margin: 8px 0;
+  width:300em;
+
   font-size:19px;
 }
 
 .password-login-form{
   border-radius: 10px;
   font-size:19px;
-  width:90%;
+  width:400px;
 }
 
 .addUserForm .inputGrouplogin {
-  width: 100%;
+  width: 480px;
   display: flex;
   flex-direction: column;
 }
@@ -78,10 +75,10 @@
   padding: 10px;
 }
 
-.inputGrouplogin button {
-  margin-top: 10px;
-}
 
+.inputGrouplogin{
+  margin-left:60px;
+}
 .addUser h3 {
   text-align: center;
   font-weight: bold;
