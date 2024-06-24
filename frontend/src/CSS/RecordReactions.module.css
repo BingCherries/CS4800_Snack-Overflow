@@ -1,0 +1,192 @@
+.recordReactionContainer {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 40px;
+  }
+  
+  .leftPanel {
+    padding-right: 20px;
+    background-color: #f1f1f1; /* Background color for left panel */
+  }
+  
+  .rightPanel {
+    padding-left: 20px;
+    background-color: #ffffff; /* Background color for right panel */
+    border-left: 1px solid #ccc;
+  }
+  
+  .section {
+    margin-bottom: 40px;
+  }
+  
+  .sectionTitle {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+  }
+  
+  .inputArea {
+    margin-bottom: 20px;
+  }
+  
+  .input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .ingredients {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .ingredient {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f9f9f9; /* Ingredient background color */
+    padding: 5px 10px;
+    border-radius: 5px;
+  }
+  
+  .removeIngredient {
+    background: none;
+    border: none;
+    color: red;
+    cursor: pointer;
+  }
+  
+  .addIngredient {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
+  .addIngredientButton {
+    padding: 10px;
+    background: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .buttonArea {
+    text-align: right;
+  }
+  
+  .addButton {
+    padding: 10px 20px;
+    background: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .searchArea {
+    margin-bottom: 20px;
+  }
+  
+  .logList {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .logItem {
+    background: #f9f9f9; /* Log item background color */
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  .logButtons {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
+  .editButton,
+  .deleteButton {
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    margin-right:5px;
+  }
+  
+  .editButton {
+    background: #ff9800;
+    color: white;
+  }
+  
+  .deleteButton {
+    background: #f44336;
+    color: white;
+  }
+  
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.5);
+  }
+  
+  .modalContent {
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    width: 400px;
+    max-width: 100%;
+  }
+  
+  .modalButtonArea {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  .updateButton,
+  .deleteConfirmButton,
+  .cancelButton {
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .updateButton {
+    background: #4caf50;
+    color: white;
+  }
+  
+  .deleteConfirmButton {
+    background: #f44336;
+    color: white;
+  }
+  
+  .cancelButton {
+    background: #9e9e9e;
+    color: white;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .recordReactionContainer {
+      grid-template-columns: 1fr; /* Adjust to single column layout on smaller screens */
+    }
+  
+    .leftPanel,
+    .rightPanel {
+      padding: 20px; /* Add padding to panels on smaller screens */
+    }
+  }
+  
