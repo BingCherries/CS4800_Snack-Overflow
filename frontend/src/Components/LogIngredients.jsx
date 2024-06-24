@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-
+import EditIcon from '@mui/icons-material/ModeEdit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import toast, { Toaster } from 'react-hot-toast';
 
 function LogIngredients() {
     const [ingredient, setIngredient] = useState('');
@@ -9,7 +11,6 @@ function LogIngredients() {
     const [searchTerm, setSearchTerm] = useState('');
     const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(null);
     const [showEditModal, setShowEditModal] = useState(false);
-    const [showToast, setShowToast] = useState(false);
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -47,8 +48,7 @@ function LogIngredients() {
         updatedIngredients[editIndex] = { ingredient, date };
         setLoggedIngredients(updatedIngredients);
         closeEditModal();
-        setShowToast(true);
-        setTimeout(() => setShowToast(false), 500);
+        toast.success('Changes saved successfully!');
     };
 
     const handleDelete = (index) => {
@@ -58,6 +58,7 @@ function LogIngredients() {
     const confirmDelete = (index) => {
         setLoggedIngredients(loggedIngredients.filter((_, i) => i !== index));
         setShowDeleteConfirmation(null);
+        toast.success('Ingredient deleted!');
     };
 
     const cancelDelete = () => {
@@ -65,95 +66,112 @@ function LogIngredients() {
     };
 
     return (
-        <div>
-            <h1>Log Ingredients</h1>
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="ingredient">Ingredient:</label>
+        <div className="log-ingredients-container">
+            {/* Side Area with User Input Fields */}
+            <div className="side-area">
+                <h1 className='log_ingre_title'>Log Ingredients</h1>
+                <label htmlFor="search_bar">Search Ingredients:</label>
                 <input
+                    className='ingre_search'
                     type="text"
-                    id="ingredient"
-                    name="ingredient"
-                    value={ingredient}
-                    onChange={(e) => setIngredient(e.target.value)}
-                    required
+                    placeholder="Search ingredients..."
+                    value={searchTerm}
+                    onChange={handleSearch}
                 />
-                <label htmlFor="date">Date:</label>
-                <input
-                    type="date"
-                    id="date"
-                    name="date"
-                    value={date}
-                    onChange={(e) => setDate(e.target.value)}
-                    required
-                />
-                <button type="submit">Log Ingredient</button>
-            </form>
-
-            <h2>Search Ingredients:</h2>
-            <input
-                type="text"
-                placeholder="Search ingredients..."
-                value={searchTerm}
-                onChange={handleSearch}
-            />
-
-            <h2>Logged Ingredients:</h2>
-            <div className="ingredients-container">
-                {filteredIngredients.map((log, index) => (
-                    <div key={index} className="ingredient-note">
-                        <p><strong>Ingredient:</strong> {log.ingredient}</p>
-                        <p><strong>Date:</strong> {log.date}</p>
-                        <button onClick={() => openEditModal(index)}>Edit</button>
-                        <button onClick={() => handleDelete(index)}>Delete</button>
-                    </div>
-                ))}
+                <form onSubmit={handleSubmit}>
+                    <label htmlFor="ingredient">Ingredient:</label>
+                    <input
+                        className="ingredient_form_input"
+                        type="text"
+                        id="ingredient"
+                        name="ingredient"
+                        value={ingredient}
+                        onChange={(e) => setIngredient(e.target.value)}
+                        required
+                    /><br></br>
+                    <label htmlFor="date">Date:</label><br></br>
+                    <input
+                        className='ingredient_date_input'
+                        type="date"
+                        id="date"
+                        name="date"
+                        value={date}
+                        onChange={(e) => setDate(e.target.value)}
+                        required
+                    />
+                    <button className="log_submit_btn" type="submit">Log Ingredient</button>
+                </form>
             </div>
 
-            {showDeleteConfirmation !== null && (
-                <div className="delete-confirmation">
-                    <p>Are you sure you want to delete this note?</p>
-                    <button onClick={() => confirmDelete(showDeleteConfirmation)}>Yes</button>
-                    <button onClick={cancelDelete}>No</button>
+            {/* Main Area with Logged Ingredients */}
+            <div className="main-area">
+                <h2>Logged Ingredients:</h2>
+                <div className="ingredients-container">
+                    {filteredIngredients.map((log, index) => (
+                        <div key={index} className="ingredient-note">
+                            <div className="ingredient-header">
+                                <p><strong>Ingredient:</strong> {log.ingredient}</p>
+                                <p><strong>Date:</strong> {log.date}</p>
+                            </div>
+                            <div className="button-container">
+                                <button className='edit-log' onClick={() => openEditModal(index)}><EditIcon /></button>
+                                <button className='delete-log' onClick={() => handleDelete(index)}><DeleteIcon /></button>
+                            </div>
+                        </div>
+                    ))}
                 </div>
-            )}
 
-            {showEditModal && (
-                <div className="edit-modal">
-                    <div className="edit-modal-content">
-                        <h2>Edit Ingredient</h2>
-                        <form onSubmit={handleEditSubmit}>
-                            <label htmlFor="editIngredient">Ingredient:</label>
-                            <input
-                                type="text"
-                                id="editIngredient"
-                                name="editIngredient"
-                                value={ingredient}
-                                onChange={(e) => setIngredient(e.target.value)}
-                                required
-                            />
-                            <label htmlFor="editDate">Date:</label>
-                            <input
-                                type="date"
-                                id="editDate"
-                                name="editDate"
-                                value={date}
-                                onChange={(e) => setDate(e.target.value)}
-                                required
-                            />
-                            <button type="submit">Save Changes</button>
-                            <button type="button" onClick={closeEditModal}>Cancel</button>
-                        </form>
+                {/* Delete Confirmation Dialog */}
+                {showDeleteConfirmation !== null && (
+                    <div className="delete-confirmation">
+                        <p>Are you sure you want to delete this ingredient?</p>
+                        <button className='yes-btn' onClick={() => confirmDelete(showDeleteConfirmation)}>Yes</button>
+                        <button className='no-btn' onClick={cancelDelete}>No</button>
                     </div>
-                </div>
-            )}
+                )}
 
-            {showToast && (
-                <div className="toast">
-                    <p className='toast-msg'>Changes Saved</p>
-                </div>
-            )}
+                {/* Edit Modal */}
+                {showEditModal && (
+                    <div className="edit-modal">
+                        <div className="edit-modal-content">
+                            <h2>Edit Ingredient</h2>
+                            <form onSubmit={handleEditSubmit}>
+                                <label htmlFor="editIngredient">Ingredient:</label>
+                                <br></br>
+                                <input
+                                    className='edit-ingre-input'
+                                    type="text"
+                                    id="editIngredient"
+                                    name="editIngredient"
+                                    value={ingredient}
+                                    onChange={(e) => setIngredient(e.target.value)}
+                                    required
+                                />
+                                <br></br>
+                                <label htmlFor="editDate">Date:</label>
+                                <br></br>
+                                <input
+                                    className='del-ingre-input'
+                                    type="date"
+                                    id="editDate"
+                                    name="editDate"
+                                    value={date}
+                                    onChange={(e) => setDate(e.target.value)}
+                                    required
+                                /><br></br>
+                                <button className='save-changees-btn' type="submit">Save Changes</button>
+                                <button className='cancel-btn' type="button" onClick={closeEditModal}>Cancel</button>
+                            </form>
+                        </div>
+                    </div>
+                )}
+
+                {/* Toast Notification */}
+                <Toaster />
+            </div>
         </div>
     );
 }
 
 export default LogIngredients;
+
