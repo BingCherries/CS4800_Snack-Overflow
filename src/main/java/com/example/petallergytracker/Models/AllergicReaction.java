@@ -3,12 +3,11 @@ package com.example.petallergytracker.Models;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NonNull;
+import lombok.*;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.util.List;
 
 /**
  * Entity representing an allergic reaction to a specific ingredient.
@@ -18,7 +17,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "allergyreactions")
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
+@Getter
+@Setter
 public class AllergicReaction {
     @Id
 //    @GeneratedValue(strategy = GenerationType.AUTO)
@@ -27,13 +29,12 @@ public class AllergicReaction {
 //    @ManyToOne(cascade = CascadeType.ALL)  // Many reactions can be associated with one ingredient
 //    @JoinColumn(name = "ingredient_id", nullable = false)  // Foreign key to Ingredient table
     private Food food;
-//
 //    @Column(length = 500)
-    @NotNull
-    @NotEmpty
+    //@NotNull
+    //@NotEmpty
     private String symptoms;  // Description of the allergic symptoms
 
-    @NotNull
+    //@NotNull
     private int severity;  // Severity of the reaction, scaled 1-10
 
 //    /**
@@ -45,13 +46,13 @@ public class AllergicReaction {
 //     * Constructs a new Allergic Reaction with specified ingredient, symptoms, and severity.
 //     * @param food The ingredient that caused the reaction.
 //     * @param symptoms Descriptive symptoms of the allergic reaction.
-//     * @param severity Severity level of the reaction.
+//     * @param severity level of the reaction.
 //     */
-//    public AllergicReaction(Food food, String symptoms, int severity) {
-//        this.food = food;
-//        this.symptoms = symptoms;
-//        this.severity = severity;
-//    }
+    public AllergicReaction(Food food, String symptoms, int severity) {
+        this.food = food;
+        this.symptoms = symptoms;
+        this.severity = severity;
+    }
 
     @Override
     public boolean equals(Object o) {

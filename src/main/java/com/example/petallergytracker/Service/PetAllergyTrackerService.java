@@ -78,6 +78,7 @@ public class PetAllergyTrackerService {
      * ****************** Implement CRUD for AllergicReactionRepository **************
      * */
     public AllergicReaction createAllergicReaction(AllergicReaction allergicReaction) {
+        /*
         Optional<Food> mostRecentFood = getMostRecentFood();
         if (!mostRecentFood.isPresent()) {
             return null;
@@ -85,6 +86,20 @@ public class PetAllergyTrackerService {
 
         AllergicReaction newAllergicReaction = AllergicReaction.builder()
                 .food(mostRecentFood.get()).symptoms(allergicReaction.getSymptoms()).severity(allergicReaction.getSeverity()).build();
+
+        return allergicReactionRepository.save(newAllergicReaction);
+         */
+        Food food = allergicReaction.getFood();
+        if (food.getId() == null || !foodRepository.existsById(food.getId())) {
+            food = foodRepository.save(food);
+        }
+
+        // Create and save the allergic reaction with the provided food
+        AllergicReaction newAllergicReaction = AllergicReaction.builder()
+                .food(food)
+                .symptoms(allergicReaction.getSymptoms())
+                .severity(allergicReaction.getSeverity())
+                .build();
 
         return allergicReactionRepository.save(newAllergicReaction);
     }

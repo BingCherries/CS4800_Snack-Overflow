@@ -18,4 +18,8 @@ public interface FoodRepository extends MongoRepository<Food, ObjectId> {
             "{ '$limit' : 1 }"
     })
     Optional<Food> findFirstByOrderByIdDesc();
+
+    Optional<Food> findById(ObjectId id);
+
+    boolean existsById(ObjectId id);
 }

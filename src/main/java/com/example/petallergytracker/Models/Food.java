@@ -1,5 +1,7 @@
 package com.example.petallergytracker.Models;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
@@ -19,20 +21,23 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "food")
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
+@Getter
+@Setter
 public class Food {
     @Id  // Marks the id field as the primary key of the entity.
 //    @GeneratedValue(strategy = GenerationType.AUTO)  // Configures the way of increment of the specified column(field).
     private ObjectId id;  // Unique identifier for each ingredient.
 
-    @NotNull
-    @NotEmpty
+   // @NotNull
+   // @NotEmpty
     private String name;  // Name of the ingredient.
 
 //    @ElementCollection  // This annotation is used to define a collection of instances of a basic type or embeddable class.
 //    @ElementCollection
-    @NotNull
-    @NotEmpty
+    //@NotNull
+    //@NotEmpty
     private List<String> ingredients;  // List of components that make up the ingredient.
 
 //    /**
@@ -45,10 +50,13 @@ public class Food {
 //     * @param name The name of the ingredient.
 //     * @param ingredients The components that make up the ingredient.
 //     */
-//    public Food(String name, List<String> ingredients) {
-//        this.name = name;
-//        this.ingredients = ingredients;
-//    }
+
+    @JsonCreator
+    public Food(@JsonProperty("name") String name, @JsonProperty("ingredients") List<String> ingredients) {
+        this.name = name;
+        this.ingredients = ingredients;
+    }
+
 
     @Override
     public boolean equals(Object o) {
