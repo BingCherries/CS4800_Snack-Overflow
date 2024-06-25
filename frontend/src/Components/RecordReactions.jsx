@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import toast, { Toaster } from 'react-hot-toast'; // Importing toast for notifications
-import styles from '../CSS/RecordReactions.module.css'; // Importing styles
+import toast, { Toaster } from 'react-hot-toast';
+import styles from '../CSS/RecordReactions.module.css';
 
 const RecordReaction = () => {
-  // State variables for form inputs, logs, modals, search, and filters
   const [foodName, setFoodName] = useState('');
   const [ingredients, setIngredients] = useState([]);
   const [ingredientInput, setIngredientInput] = useState('');
@@ -17,7 +16,6 @@ const RecordReaction = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [filter, setFilter] = useState('mostRecent');
 
-  // Function to add ingredient to the list
   const handleAddIngredient = () => {
     if (ingredientInput.trim() !== '') {
       setIngredients([...ingredients, ingredientInput.trim()]);
@@ -25,14 +23,12 @@ const RecordReaction = () => {
     }
   };
 
-  // Function to remove ingredient from the list
   const handleRemoveIngredient = (index) => {
     const updatedIngredients = [...ingredients];
     updatedIngredients.splice(index, 1);
     setIngredients(updatedIngredients);
   };
 
-  // Function to add a new log entry
   const handleAddLog = () => {
     if (foodName.trim() === '' || symptoms.trim() === '' || severity.trim() === '' || date.trim() === '') {
       alert('Please fill in all fields.');
@@ -51,10 +47,9 @@ const RecordReaction = () => {
 
     setLogs([...logs, newLog]);
     resetFormFields();
-    toast.success('Logged Reaction'); // Success toast notification
+    toast.success('Logged Reaction');
   };
 
-  // Function to reset form fields after submission
   const resetFormFields = () => {
     setFoodName('');
     setIngredients([]);
@@ -64,7 +59,6 @@ const RecordReaction = () => {
     setDate('');
   };
 
-  // Function to handle editing an existing log entry
   const handleEditLog = (index) => {
     const log = logs[index];
     setFoodName(log.food.name);
@@ -76,7 +70,6 @@ const RecordReaction = () => {
     setIsEditModalOpen(true);
   };
 
-  // Function to update an existing log entry
   const handleUpdateLog = () => {
     if (foodName.trim() === '' || symptoms.trim() === '' || severity.trim() === '' || date.trim() === '') {
       alert('Please fill in all fields.');
@@ -98,35 +91,30 @@ const RecordReaction = () => {
     setLogs(updatedLogs);
     resetFormFields();
     setIsEditModalOpen(false);
-    toast.success('Changes saved'); // Success toast notification
+    toast.success('Changes saved');
   };
 
-  // Function to prompt for deleting a log entry
   const handleDeleteLog = (index) => {
     setCurrentEditIndex(index);
     setIsDeleteModalOpen(true);
   };
 
-  // Function to confirm deletion of a log entry
   const confirmDeleteLog = () => {
     const updatedLogs = [...logs];
     updatedLogs.splice(currentEditIndex, 1);
     setLogs(updatedLogs);
     setIsDeleteModalOpen(false);
-    toast.success('Note deleted'); // Success toast notification
+    toast.success('Note deleted');
   };
 
-  // Function to handle search input change
   const handleSearch = (e) => {
     setSearchQuery(e.target.value.toLowerCase());
   };
 
-  // Function to handle filter change
   const handleFilterChange = (e) => {
     setFilter(e.target.value);
   };
 
-  // Filtering logs based on search query and selected filter
   const filteredLogs = logs
     .filter((log) => {
       return (
@@ -150,14 +138,12 @@ const RecordReaction = () => {
 
   return (
     <div className={styles.recordReactionContainer}>
-      <Toaster /> {/* Toast container for notifications */}
+      <Toaster />
 
-      {/* Left panel for logging new reactions */}
       <div className={styles.leftPanel}>
         <div className={styles.section}>
           <h2 className={styles.sectionTitle}>Record Reaction</h2>
 
-          {/* Input fields for logging reaction */}
           <div className={styles.inputArea}>
             <label htmlFor="foodName">Food Name:</label>
             <input
@@ -237,13 +223,11 @@ const RecordReaction = () => {
             />
           </div>
 
-          {/* Button area for adding or updating logs */}
           <div className={styles.buttonArea}>
             {currentEditIndex === null ? (
               <button type="button" onClick={handleAddLog} className={styles.addButton}>
                 Log Reaction
               </button>
-              
             ) : (
               <button type="button" onClick={handleUpdateLog} className={styles.addButton}>
                 Save Changes
@@ -252,7 +236,6 @@ const RecordReaction = () => {
           </div>
         </div>
 
-        {/* Section for filters */}
         <div className={styles.section}>
           <h2 className={styles.sectionTitle}>Search Logged Reactions</h2>
           <div className={styles.searchArea}>
@@ -272,7 +255,6 @@ const RecordReaction = () => {
         </div>
       </div>
 
-      {/* Right panel for displaying logged reactions */}
       <div className={styles.rightPanel}>
         <div className={styles.section}>
           <h2 className={styles.sectionTitle}>Logged Reactions</h2>
@@ -312,7 +294,6 @@ const RecordReaction = () => {
         </div>
       </div>
 
-      {/* Edit log modal */}
       {isEditModalOpen && (
         <div className={styles.modal}>
           <div className={styles.modalContent}>
@@ -404,7 +385,6 @@ const RecordReaction = () => {
         </div>
       )}
 
-      {/* Delete log confirmation modal */}
       {isDeleteModalOpen && (
         <div className={styles.modal}>
           <div className={styles.modalContent}>
