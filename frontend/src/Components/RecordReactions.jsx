@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast'; // Importing toast for notifications
 import styles from '../CSS/RecordReactions.module.css'; // Importing styles
-import api from '../services/api';
 
 const RecordReaction = () => {
   // State variables for form inputs, logs, modals, search, and filters
@@ -51,7 +50,6 @@ const RecordReaction = () => {
     };
 
     setLogs([...logs, newLog]);
-    addAllergyReaction(newLog);
     resetFormFields();
     toast.success('Logged Reaction'); // Success toast notification
   };
@@ -80,8 +78,7 @@ const RecordReaction = () => {
 
   // Function to update an existing log entry
   const handleUpdateLog = () => {
-    //if (foodName.trim() === '' || symptoms.trim() === '' || severity.trim() === '' || date.trim() === '') {
-    if (foodName.trim() === '' || symptoms.trim() === '' || severity.trim() === '') {
+    if (foodName.trim() === '' || symptoms.trim() === '' || severity.trim() === '' || date.trim() === '') {
       alert('Please fill in all fields.');
       return;
     }
@@ -150,17 +147,6 @@ const RecordReaction = () => {
       }
       return 0;
     });
-
-  // HTTP POST request functionality for adding an allergy reaction to the MongoDB
-  const addAllergyReaction = async (newLog) => {
-    try {
-      const response = await api.post('/allergy', newLog);
-      console.log('Allergic reaction added:', response.data);
-    } catch (err) {
-      console.error('Error adding allergic reaction:', err);
-      toast.error('Error adding allergic reaction');
-    }
-  };
 
   return (
     <div className={styles.recordReactionContainer}>
@@ -337,7 +323,7 @@ const RecordReaction = () => {
                 type="text"
                 id="editFoodName"
                 value={foodName}
-                onChange={(e) => setFoodName(e.tar  .value)}
+                onChange={(e) => setFoodName(e.target.value)}
                 className={styles.input}
               />
             </div>
