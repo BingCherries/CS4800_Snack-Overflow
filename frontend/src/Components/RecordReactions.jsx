@@ -51,7 +51,7 @@ const RecordReaction = () => {
 
     setLogs([...logs, newLog]);
     resetFormFields();
-    toast.success('New note created'); // Success toast notification
+    toast.success('Logged Reaction'); // Success toast notification
   };
 
   // Function to reset form fields after submission
@@ -243,6 +243,7 @@ const RecordReaction = () => {
               <button type="button" onClick={handleAddLog} className={styles.addButton}>
                 Log Reaction
               </button>
+              
             ) : (
               <button type="button" onClick={handleUpdateLog} className={styles.addButton}>
                 Save Changes
@@ -253,7 +254,7 @@ const RecordReaction = () => {
 
         {/* Section for filters */}
         <div className={styles.section}>
-          <h2 className={styles.sectionTitle}>Filters</h2>
+          <h2 className={styles.sectionTitle}>Search Logged Reactions</h2>
           <div className={styles.searchArea}>
             <input
               type="text"
@@ -262,7 +263,7 @@ const RecordReaction = () => {
               onChange={handleSearch}
               className={styles.input}
             />
-            <select value={filter} onChange={handleFilterChange} className={styles.input}>
+            <select value={filter} onChange={handleFilterChange} className={styles.drop}>
               <option value="mostRecent">Most Recent</option>
               <option value="severityHighLow">Severity: High to Low</option>
               <option value="severityLowHigh">Severity: Low to High</option>
