@@ -1,61 +1,71 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Playfair Display", serif;
+.about-section-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  text-align: center; /* Center align text within container */
+  margin-top: -20px; /* Move the section up */
+  position: relative; /* Add relative positioning */
+}
+
+@media (min-width: 768px) {
+  .about-section-container {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center; /* Center align columns horizontally */
   }
 
-  body {
-    max-width: 100%;
-    overflow-x: hidden;
-  }
-  
-  body {
-    background-color: #fbfefa;
+  .text-column {
+    flex: 1;
+    padding-right: 20px; /* Adjust spacing between columns */
+    text-align: left; /* Align text within column */
   }
 
-.about-section-container{
-    color: aquamarine;
+  .image-column {
+    flex: 1;
+    display: flex;
+    justify-content: center; /* Center align image horizontally */
+  }
 }
-.about-title{
-color: aqua;
-margin-left:52rem;
-padding-top:150px;
-font-size: 4rem;
-color:#4c4c4c
-}
-.about-paragraph{
-color:#6a6a6a;;
-padding-top:80px;
-max-width:1300px;
-font-size: 1.7rem;
-padding-left:40px;
-margin-left:350px;
-margin-top:-20px;
 
+.about-title {
+  font-size: 3.5rem;
+  margin-bottom: 10px;
+  text-align: center;
+  margin-top: -10px; /* Move the title up */
+  margin-left: 150px;
 }
-.pet-tower{
-    max-width:530px;
-    margin-top:-100px;
-}
-.yarn{
-    margin-top:-250px;
-    margin-left:1080px;
-    padding-left:50px;
 
+.about-paragraph {
+  font-size: 1.7rem;
+  text-align: center;
+  line-height: 6vh;
+  margin-top: -10px; /* Move the paragraph up */
+  margin-left: 180px;
 }
-.treats{
-position: absolute;
-  top: 80px;
-  right:30px;
-  z-index: -2;
-  max-width: 700px;
-}
-.header{
-position: absolute;
-  top: -120px;
-  margin-left:-200px;
-  z-index: -2;
-  
 
+.about-image {
+  max-width: 80%;
+  height: auto;
+  margin-top: -15px;
 }
+
+.treats-image {
+  position: absolute;
+  top: 0;
+  left: -17vw;
+  width:34%; /* Default size */
+  height: auto;
+  z-index: 1; /* Ensure it stays on top */
+}
+
+
+
+.hearts-image {
+  position: absolute;
+  bottom: -90px;
+  left: -280px;
+  width:100%;/* Default size */
+  height: auto;
+  z-index: -1; /* Ensure it stays on top */
+}
+
