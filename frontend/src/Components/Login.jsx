@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import styles from "../CSS/login.module.css"; // Import CSS module
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -36,15 +37,15 @@ const Login = () => {
   };
 
   return (
-    <div className="loginform">
-      <h3 className="login-title">Login</h3>
-      <h1 className="welcome-login">Welcome back!</h1>
-      <div className="form-group-login">
+    <div className={styles.loginform}>
+      <h3 className={styles["login-title"]}>Login</h3>
+      <h1 className={styles["welcome-login"]}>Welcome back!</h1>
+      <div className={styles["form-group-login"]}>
         <form className="addUserForm" onSubmit={handleSubmit}>
-          <div className="inputGrouplogin">
+          <div className={styles["inputGrouplogin"]}>
             <label htmlFor="email">Email:</label>
             <input
-              className="email-login-form"
+              className={styles["email-login-form"]}
               type="email"
               id="email"
               name="email"
@@ -53,11 +54,11 @@ const Login = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-            {emailError && <span className="error">{emailError}</span>}
-            
-            <label htmlFor="Password">Password:</label>
+            {emailError && <span className={styles.error}>{emailError}</span>}
+
+            <label htmlFor="password">Password:</label>
             <input
-              className="password-login-form"
+              className={styles["password-login-form"]}
               type="password"
               id="password"
               name="password"
@@ -66,19 +67,21 @@ const Login = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            {passwordError && <span className="error">{passwordError}</span>}
+            {passwordError && (
+              <span className={styles.error}>{passwordError}</span>
+            )}
 
-            <div className="no-account">
+            <div className={styles["no-account"]}>
               <p>
                 Don't have an Account?
-                <Link to="/signup" type="submit" className="btn btn-success">
+                <Link to="/signup" className="btn btn-success">
                   Sign Up
                 </Link>
               </p>
             </div>
 
-            <div className="btn-location">
-              <button className="login-btn" type="submit">
+            <div className={styles["btn-location"]}>
+              <button className={styles["login-btn"]} type="submit">
                 Login
               </button>
             </div>

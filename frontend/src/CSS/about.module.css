@@ -1,0 +1,71 @@
+.about-section-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  text-align: center; /* Center align text within container */
+  margin-top: -20px; /* Move the section up */
+  position: relative; /* Add relative positioning */
+}
+
+@media (min-width: 768px) {
+  .about-section-container {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center; /* Center align columns horizontally */
+  }
+
+  .text-column {
+    flex: 1;
+    padding-right: 20px; /* Adjust spacing between columns */
+    text-align: left; /* Align text within column */
+  }
+
+  .image-column {
+    flex: 1;
+    display: flex;
+    justify-content: center; /* Center align image horizontally */
+  }
+}
+
+.about-title {
+  font-size: 3.5rem;
+  margin-bottom: 10px;
+  text-align: center;
+  margin-top: -10px; /* Move the title up */
+  margin-left: 150px;
+}
+
+.about-paragraph {
+  font-size: 1.7rem;
+  text-align: center;
+  line-height: 6vh;
+  margin-top: -10px; /* Move the paragraph up */
+  margin-left: 180px;
+}
+
+.about-image {
+  max-width: 80%;
+  height: auto;
+  margin-top: -15px;
+}
+
+.treats-image {
+  position: absolute;
+  top: 0;
+  left: -17vw;
+  width:34%; /* Default size */
+  height: auto;
+  z-index: 1; /* Ensure it stays on top */
+}
+
+
+
+.hearts-image {
+  position: absolute;
+  bottom: -90px;
+  left: -280px;
+  width:100%;/* Default size */
+  height: auto;
+  z-index: -1; /* Ensure it stays on top */
+}
+
