@@ -194,7 +194,7 @@
 }
 
 .modalContent {
-  width: 300px;
+  width: 1000px;
   max-width: 90%;
   max-height: 80%;
   background-color: #fff;
@@ -224,7 +224,7 @@
   border-collapse: collapse;
   margin: 20px 0;
   font-size: 1em;
-  min-width: 400px;
+  min-width: 800px;
 }
 
 .reportTable th, .reportTable td {
