@@ -1,11 +1,12 @@
 import React from 'react';
 import styles from '../CSS/AllergenOverview.module.css';
 
-const AllergenOverview = ({ onViewClick }) => {
+const AllergenOverview = ({ commonAllergens = [], onViewClick }) => {
   return (
       <div className={styles.container}>
-          <button onClick={onViewClick} className={styles.viewButton}>View</button>
           {/*
+          <button onClick={onViewClick} className={styles.viewButton}>View</button>
+
           <button onClick={onViewClick}>View All Allergens</button>
           <ul>
               {allergens.map((allergen, index) => (
@@ -13,6 +14,12 @@ const AllergenOverview = ({ onViewClick }) => {
               ))}
           </ul>
           */}
+          <div className={styles.commonAllergensList}>
+              <h3>Common Allergens:</h3>
+              {commonAllergens.map((allergen, index) => (
+                  <div key={index} className={styles.commonAllergensItem}>{allergen}</div>
+              ))}
+          </div>
       </div>
   );
 };

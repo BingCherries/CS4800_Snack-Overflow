@@ -1,7 +1,13 @@
 .container {
     display: flex;
+    /*
     justify-content: space-between;
     align-items: center;
+    */
+    flex-direction: column;
+    padding: 10px;
+    align-items: flex-start;
+    width: 100%;
   }
   
   .viewButton {
@@ -12,4 +18,22 @@
     border-radius: 8px;
     cursor: pointer;
   }
+
+.listContainer {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 20px;
+}
+
+
+.foods, .reactions, .commonAllergens {
+    flex: 1;
+    margin: 0 10px;
+}
+
+.foods ul, .reactions ul, .commonAllergens ul {
+    list-style-type: disc;
+    padding-left: 20px;
+}
   
