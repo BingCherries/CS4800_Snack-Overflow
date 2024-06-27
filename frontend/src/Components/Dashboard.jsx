@@ -103,12 +103,8 @@ const Dashboard = () => {
             <h2 className={styles.sectionTitle}>Generated Report</h2>
             <button className={styles.viewButton} onClick={handleGenerateReport}>Generate Report</button>
             <GeneratedReports/>
-            <h2 className={styles.sectionTitle}>Generated Report</h2>
-            <button className={styles.viewButton} onClick={handleGenerateReport}>Generate Report</button>
-            <GeneratedReports/>
           </div>
           <div className={styles.doggo}>
-            <img src={doggo} alt="Dog"/>
             <img src={doggo} alt="Dog"/>
           </div>
           <div className={styles.cato}>
