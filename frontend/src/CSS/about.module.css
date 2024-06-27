@@ -1,0 +1,72 @@
+.about-section-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  text-align: center; /* Center align text within container */
+  margin-top: 150px;
+  position: relative; /* Add relative positioning */
+  flex-direction: row;
+  align-items: center;
+  justify-content: center; /* Center align columns horizontally */
+}
+
+.text-column {
+  max-width: 730px;
+  flex: 1;
+  padding-right: 20px; /* Adjust spacing between columns */
+  text-align: left; /* Align text within column */
+}
+
+.image-column {
+  flex: 1;
+  display: flex;
+  justify-content: center; /* Center align image horizontally */
+}
+
+.about-title {
+  font-size: 3.5rem;
+  margin-bottom: 10px;
+  text-align: center;
+  margin-top: -10px;
+  color:#4c4c4c;
+}
+
+.about-paragraph {
+  font-size: 1.7rem;
+  text-align: center;
+  line-height: 6vh;
+  max-width: 1000px;
+  min-width: 800px;
+  margin-top: -10px;
+  margin-left: 180px;
+  color: #6a6a6a;
+}
+
+.about-image {
+  position: absolute;
+  max-width: 50%;
+  left: 50vw;
+  top: -10vw;
+  z-index: -1;
+}
+
+.treats-image {
+  position: absolute;
+  top: 0;
+  left: -17vw;
+  width:34%; /* Default size */
+  height: auto;
+  z-index: 1; /* Ensure it stays on top */
+}
+
+
+
+.hearts-image {
+  position: absolute;
+  bottom: -90px;
+  left: -280px;
+  width:100%;/* Default size */
+  height: auto;
+  z-index: -1; /* Ensure it stays on top */
+}
+

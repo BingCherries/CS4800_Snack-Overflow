@@ -1,0 +1,259 @@
+* {
+  box-sizing: border-box;
+  font-family: "Playfair Display", serif;
+  
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.App {
+  min-height: 100vh;
+  width: 85vw;
+  max-width: 1900px;
+  margin: 0rem auto;
+}
+
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+  background-color: #fbf9f8;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 0;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-links-container {
+  display: flex;
+  list-style-type: none;
+}
+
+.navbar-links-container a {
+  text-decoration: none;
+  color: #4c4c4c;
+  font-size: 1.3rem;
+  font-weight: 600;
+  padding: 0.5rem 1.5rem;
+  transition: color 0.3s;
+}
+
+.navbar-links-container a:hover {
+  color: #6b8fdf;
+}
+
+.primary-button {
+  padding: 0.9rem 1.75rem;
+  background-color: #6b8fdf;
+  outline: none;
+  border: none;
+  border-radius: 5rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s;
+  color: #4c4c4c;
+  margin-left: 0rem;
+}
+
+.primary-button:hover {
+  background: #85a6ee;
+  transition: 0.2s;
+  transform: scale(1.05);
+}
+
+.home-bannerImage-container {
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  right: 0px;
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+  z-index: -1;
+}
+
+@media (max-width: 768px) {
+  .home-bannerImage-container {
+    width: 70%;
+    margin-top: -50px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .home-bannerImage-container {
+    width: 40%;
+  }
+}
+
+
+.home-full-txt {
+  margin-left: 230px;
+  margin-top: 40px;
+}
+
+.home-title {
+  font-size: 4rem;
+}
+
+.home-image-section {
+  position: fixed;
+  right: 0%;
+  top: 40%;
+  width: 60%;
+  height: auto;
+  z-index: -1;
+}
+
+.home-text-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  margin-left: 90px;
+}
+
+.primary-heading {
+  font-size: clamp(1rem, 5vw, 2rem);
+  color: #4c4c4c;
+  line-height: 5rem;
+  max-width: 900px;
+  padding-top: 130px;
+  margin-right: 15px;
+}
+
+.primary-text {
+  font-size: clamp(1rem, 3vw, 1.7rem);
+  font-weight: 500;
+  max-width: 730px;
+  color: #575757;
+  margin: 1.5rem 0rem;
+  text-shadow: 0px 0px 5px rgba(255, 255, 255);
+}
+
+.secondary-button {
+  padding: 1rem 2.5rem;
+  background-color: #6b8fdf;
+  outline: none;
+  border: none;
+  border-radius: 3rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+  font-weight: 600;
+  color: white;
+  transition: 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 190px;
+}
+
+.secondary-button svg {
+  margin-left: 0.75rem;
+  font-size: 1.5rem;
+}
+
+.secondary-button:hover {
+  background-color: #87aaf4;
+  transform: scale(1.05);
+}
+
+.nav-logo-container {
+  padding-left: 30px;
+  padding-top: 30px;
+  margin-top: -4px;
+}
+
+@media (max-width: 1000px) {
+  .navbar-links-container a {
+    margin-right: 1rem;
+    font-size: 1rem;
+  }
+  .primary-button {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 800px) {
+  .nav-logo-container {
+    max-width: 140px;
+  }
+  .navbar-links-container {
+    display: none;
+  }
+  .home-bannerImage-container {
+    max-width: 450px;
+  }
+
+  .primary-heading {
+    text-align: center;
+    max-width: 90%;
+  }
+  .primary-text {
+    text-align: center;
+    max-width: 80%;
+  }
+  .home-text-section {
+    justify-content: center;
+    align-items: center;
+    margin-top: 4rem;
+  }
+  .secondary-button {
+    font-size: 1rem;
+    padding: 0.8rem 2rem;
+    cursor: pointer;
+  }
+
+  .primary-subheading {
+    text-align: center;
+  }
+  .App {
+    max-width: 95vw;
+  }
+}
+
+@media (max-width: 1200px) {
+  .home-image-section {
+    display: none;
+  }
+}
+
+.nav-link:hover {
+  color: #6b8fdf;
+}
+
+.nav-link::after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 2px;
+  background: #6b8fdf;
+  transition: width 0.3s;
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #6b8fdf;
+  padding: 10px 15px;
+  position: relative;
+}
