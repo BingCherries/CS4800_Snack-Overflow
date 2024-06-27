@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast'; // Importing toast for notifications
 import styles from '../CSS/RecordReactions.module.css'; // Importing styles
 import api from '../services/api';
+import tracks from '../Images/tracks.png';
 
 const RecordReaction = () => {
   // State variables for form inputs, logs, modals, search, and filters
@@ -67,16 +68,16 @@ const RecordReaction = () => {
   };
 
   // Function to handle editing an existing log entry
-  const handleEditLog = (index) => {
-    const log = logs[index];
+  const handleEditLog = (log) => {
     setFoodName(log.food.name);
     setIngredients(log.food.ingredients);
     setSymptoms(log.symptoms);
     setSeverity(log.severity.toString());
     setDate(new Date(log.date).toISOString().split('T')[0]);
-    setCurrentEditIndex(index);
+    setCurrentEditIndex(logs.indexOf(log));
     setIsEditModalOpen(true);
   };
+  
 
   // Function to update an existing log entry
   const handleUpdateLog = () => {
@@ -84,7 +85,7 @@ const RecordReaction = () => {
       alert('Please fill in all fields.');
       return;
     }
-
+  
     const updatedLog = {
       food: {
         name: foodName.trim(),
@@ -94,18 +95,21 @@ const RecordReaction = () => {
       severity: parseInt(severity.trim()),
       date: new Date(date).toISOString(),
     };
-
+  
     const updatedLogs = [...logs];
     updatedLogs[currentEditIndex] = updatedLog;
     setLogs(updatedLogs);
     resetFormFields();
+    setCurrentEditIndex(null);
     setIsEditModalOpen(false);
-    toast.success('Changes saved'); // Success toast notification
+    toast.success('Changes saved');
   };
+  
+  
 
   // Function to prompt for deleting a log entry
-  const handleDeleteLog = (index) => {
-    setCurrentEditIndex(index);
+  const handleDeleteLog = (log) => {
+    setCurrentEditIndex(logs.indexOf(log));
     setIsDeleteModalOpen(true);
   };
 
@@ -114,9 +118,24 @@ const RecordReaction = () => {
     const updatedLogs = [...logs];
     updatedLogs.splice(currentEditIndex, 1);
     setLogs(updatedLogs);
+    setCurrentEditIndex(null);
     setIsDeleteModalOpen(false);
-    toast.success('Note deleted'); // Success toast notification
+    toast.success('Reaction deleted');
   };
+  
+  
+  const cancelledEditDeleteLog = () => {
+    setFoodName('');
+    setIngredients([]);
+    setIngredientInput('');
+    setSymptoms('');
+    setSeverity('');
+    setDate('');
+    setCurrentEditIndex(null);
+    setIsEditModalOpen(false);
+    setIsDeleteModalOpen(false);
+  };
+  
 
   // Function to handle search input change
   const handleSearch = (e) => {
@@ -155,16 +174,36 @@ const RecordReaction = () => {
     try {
       const response = await api.post('/allergy', newLog);
       console.log('Allergic reaction added:', response.data);
-    } catch (err) {
-      console.error('Error adding allergic reaction:', err);
-      toast.error('Error adding allergic reaction');
+      toast.success('Allergic reaction added');
+    } catch (error) {
+      console.error('Error adding allergic reaction:', error);
+      if (error.response) {
+        // The request was made and the server responded with a status code
+        // that falls out of the range of 2xx
+        console.error('Error response:', error.response.data);
+        toast.error(`Error adding allergic reaction: ${error.response.data.message}`);
+      } else if (error.request) {
+        // The request was made but no response was received
+        console.error('Error request:', error.request);
+        toast.error('Error adding allergic reaction: No response from the server');
+      } else {
+        // Something happened in setting up the request that triggered an Error
+        console.error('Error:', error.message);
+        toast.error(`Error adding allergic reaction: ${error.message}`);
+      }
     }
   };
+  
 
   return (
     <div className={styles.recordReactionContainer}>
       <Toaster /> {/* Toast container for notifications */}
 
+      {/* Left and right images */}
+      <img src={tracks} className={styles.tracks1} alt="Tracks1" />
+      <img src={tracks} className={styles.tracks2} alt="Tracks2" />
+      <img src={tracks} className={styles.tracks3} alt="Tracks3" />
+      <img src={tracks} className={styles.tracks4} alt="Tracks4" />
       {/* Left panel for logging new reactions */}
       <div className={styles.leftPanel}>
         <div className={styles.section}>
@@ -263,10 +302,8 @@ const RecordReaction = () => {
               </button>
             )}
           </div>
-        </div>
 
-        {/* Section for filters */}
-        <div className={styles.section}>
+          {/* Section for filters */}
           <h2 className={styles.sectionTitle}>Search Logged Reactions</h2>
           <div className={styles.searchArea}>
             <input
@@ -281,6 +318,7 @@ const RecordReaction = () => {
               <option value="severityHighLow">Severity: High to Low</option>
               <option value="severityLowHigh">Severity: Low to High</option>
             </select>
+            
           </div>
         </div>
       </div>
@@ -311,10 +349,10 @@ const RecordReaction = () => {
                     <strong>Date:</strong> {new Date(log.date).toLocaleDateString()}
                   </p>
                   <div className={styles.logButtons}>
-                    <button type="button" onClick={() => handleEditLog(index)} className={styles.editButton}>
+                    <button type="button" onClick={() => handleEditLog(log)} className={styles.editButton}>
                       Edit
                     </button>
-                    <button type="button" onClick={() => handleDeleteLog(index)} className={styles.deleteButton}>
+                    <button type="button" onClick={() => handleDeleteLog(log)} className={styles.deleteButton}>
                       Delete
                     </button>
                   </div>
@@ -407,9 +445,9 @@ const RecordReaction = () => {
 
             <div className={styles.buttonArea}>
               <button type="button" onClick={handleUpdateLog} className={styles.addButton}>
-                Save Changes
+                Add Reaction
               </button>
-              <button type="button" onClick={() => setIsEditModalOpen(false)} className={styles.cancelButton}>
+              <button type="button" onClick={cancelledEditDeleteLog} className={styles.cancelButton}>
                 Cancel
               </button>
             </div>
@@ -427,7 +465,7 @@ const RecordReaction = () => {
               <button type="button" onClick={confirmDeleteLog} className={styles.deleteButton}>
                 Confirm Delete
               </button>
-              <button type="button" onClick={() => setIsDeleteModalOpen(false)} className={styles.cancelButton}>
+              <button type="button" onClick={cancelledEditDeleteLog} className={styles.cancelButton}>
                 Cancel
               </button>
             </div>
