@@ -2,7 +2,9 @@ package com.example.petallergytracker.Service;
 
 import com.example.petallergytracker.Models.DashboardData;
 import com.example.petallergytracker.Models.Food;
+import com.example.petallergytracker.Models.AllergicReaction;
 import com.example.petallergytracker.Repository.AllergicReactionRepository;
+import com.example.petallergytracker.Repository.FoodRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -20,6 +22,9 @@ public class UserDashboardService {
 
     @Autowired
     private AllergicReactionRepository allergicReactionRepository;  // Direct access to repository
+
+    @Autowired
+    private FoodRepository foodRepository;
 
     /**
      * Retrieves a list of all ingredients logged by the user.
@@ -50,6 +55,7 @@ public class UserDashboardService {
      * @return List of common allergens.
      */
     public List<String> getIdentifiedCommonAllergens() {
+
         return petAllergyTrackerService.getCommonAllergens();
     }
 
@@ -59,8 +65,10 @@ public class UserDashboardService {
      * @return DashboardData containing all relevant information for the user.
      */
     public DashboardData getDashboardData() {
-        List<String> foods = getAllFoods();
-        List<String> reactions = getAllergicReactionsSummary();
+        //List<String> foods = getAllFoods();
+        //List<String> reactions = getAllergicReactionsSummary();
+        List<String> foods = foodRepository.findAll().stream().map(Food::getName).collect(Collectors.toList());
+        List<String> reactions = allergicReactionRepository.findAll().stream().map(AllergicReaction::getSymptoms).collect(Collectors.toList());
         List<String> commonAllergens = getIdentifiedCommonAllergens();
 
         return new DashboardData(foods, reactions, commonAllergens);

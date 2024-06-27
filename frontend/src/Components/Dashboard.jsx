@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect  } from 'react';
+import axios from 'axios';
+import RecordReaction from './RecordReactions';
 import IngredientsOverview from './IngredientsOverview';
 import ReactionsOverview from './ReactionsOverview';
 import AllergenOverview from './AllergenOverview';
@@ -12,6 +14,24 @@ import allergy from '../Images/allergy.png';
 
 const Dashboard = () => {
   const [selectedModal, setSelectedModal] = useState(null);
+  const [dashboardData, setDashboardData] = useState({
+    foods: [],
+    reactions: [],
+    commonAllergens: []
+  });
+
+  useEffect(() => {
+    const fetchDashboardData = async () => {
+      try {
+        const response = await axios.get('http://localhost:8080/dashboard');
+        setDashboardData(response.data);
+      } catch (error) {
+        console.error('Error fetching dashboard data:', error);
+      }
+    };
+
+    fetchDashboardData();
+  }, []);
 
   const handleViewClick = (modalType) => {
     setSelectedModal(modalType);
@@ -62,19 +82,22 @@ const Dashboard = () => {
 
       {selectedModal === 'ingredients' && (
         <Modal onClose={closeModal}>
-          <IngredientsOverview />
+          {/*<IngredientsOverview />*/}
+          <IngredientsOverview foods={dashboardData.foods} />
         </Modal>
       )}
 
       {selectedModal === 'reactions' && (
         <Modal onClose={closeModal}>
-          <ReactionsOverview />
+          {/*<ReactionsOverview />*/}
+          <ReactionsOverview reactions={dashboardData.reactions} />
         </Modal>
       )}
 
       {selectedModal === 'allergens' && (
         <Modal onClose={closeModal}>
-          <AllergenOverview />
+          {/*<AllergenOverview />*/}
+          <AllergenOverview allergens={dashboardData.commonAllergens} />
         </Modal>
       )}
     </div>
