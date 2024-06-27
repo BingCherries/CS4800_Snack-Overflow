@@ -1,6 +1,5 @@
 import React, { useState, useEffect  } from 'react';
 import axios from 'axios';
-import RecordReaction from './RecordReactions';
 import IngredientsOverview from './IngredientsOverview';
 import ReactionsOverview from './ReactionsOverview';
 import AllergenOverview from './AllergenOverview';
@@ -90,7 +89,11 @@ const Dashboard = () => {
       {selectedModal === 'reactions' && (
         <Modal onClose={closeModal}>
           {/*<ReactionsOverview />*/}
-          <ReactionsOverview reactions={dashboardData.reactions} />
+          <ReactionsOverview
+              foods={dashboardData.foods}
+              reactions={dashboardData.reactions}
+              commonAllergens={dashboardData.commonAllergens}
+          />
         </Modal>
       )}
 

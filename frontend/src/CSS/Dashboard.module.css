@@ -140,7 +140,8 @@
 }
 
 .modalContent {
-  width: 300px;
+  width: auto;
+  min-width: 400px;
   /* height: 300px; */
   max-width: 90%;
   max-height: 80%;

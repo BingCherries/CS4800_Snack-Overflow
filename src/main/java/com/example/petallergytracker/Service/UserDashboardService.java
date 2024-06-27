@@ -65,10 +65,13 @@ public class UserDashboardService {
      * @return DashboardData containing all relevant information for the user.
      */
     public DashboardData getDashboardData() {
-        //List<String> foods = getAllFoods();
+        List<String> foods = getAllFoods();
         //List<String> reactions = getAllergicReactionsSummary();
-        List<String> foods = foodRepository.findAll().stream().map(Food::getName).collect(Collectors.toList());
-        List<String> reactions = allergicReactionRepository.findAll().stream().map(AllergicReaction::getSymptoms).collect(Collectors.toList());
+
+        List<String> reactions = allergicReactionRepository.findAll().stream()
+                .map(reaction -> reaction.getFood().getName()) // Ensure reaction.getFood() is not null
+                .collect(Collectors.toList());
+
         List<String> commonAllergens = getIdentifiedCommonAllergens();
 
         return new DashboardData(foods, reactions, commonAllergens);
