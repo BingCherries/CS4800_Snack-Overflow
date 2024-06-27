@@ -1,46 +1,55 @@
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
   font-family: "Playfair Display", serif;
   
 }
+
 img {
   max-width: 100%;
   height: auto;
 }
+
 .App {
   min-height: 100vh;
   width: 85vw;
   max-width: 1900px;
   margin: 0rem auto;
 }
+
 body {
   max-width: 100%;
   overflow-x: hidden;
-}
-
-body {
   background-color: #fbf9f8;
 }
 
-nav {
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 0;
+}
+
+.navbar {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  min-height: 90px;
-  color:#4c4c4c;
- 
 }
-.navbar-menu-container {
-  display: none;
+
+.navbar-links-container {
+  display: flex;
+  list-style-type: none;
 }
+
 .navbar-links-container a {
-  margin-right: 3rem;
   text-decoration: none;
-  color:#4c4c4c;
+  color: #4c4c4c;
   font-size: 1.3rem;
   font-weight: 600;
+  padding: 0.5rem 1.5rem;
+  transition: color 0.3s;
+}
+
+.navbar-links-container a:hover {
+  color: #6b8fdf;
 }
 
 .primary-button {
@@ -53,46 +62,43 @@ nav {
   cursor: pointer;
   font-weight: 600;
   transition: 0.2s;
-  margin-right:30px;
-  color:#4c4c4c;
+  color: #4c4c4c;
+  margin-left: 0rem;
 }
 
 .primary-button:hover {
-  background:#85a6ee;
+  background: #85a6ee;
   transition: 0.2s;
   transform: scale(1.05);
 }
-.navbar-menu-container svg {
-  font-size: 1.5rem;
-  cursor: pointer;
-}
+
 .home-banner-container {
   position: relative;
   display: flex;
-  padding-top: 3rem;
+  padding-top: 0rem;
 }
+
 .home-bannerImage-container {
   position: absolute;
-  margin-top:-150px;
+  margin-top: 0px;
   z-index: -1;
-  left: -100px;
- 
 }
-.home-full-txt{
-  margin-left:230px;
-  margin-top:40px;
-  
+
+.home-full-txt {
+  margin-left: 230px;
+  margin-top: 40px;
 }
-.home-title{
+
+.home-title {
   font-size: 4rem;
 }
+
 .home-image-section {
   position: fixed;
-  right: 4%; /* Adjust as needed */
-  width: 10vw; /* Adjust size as needed */
-  width:60%; /* Ensure it doesn’t get too large */
+  right: 4%;
+  width: 60%;
   height: auto;
-  z-index: -1; /* Ensure it stays behind the login form */
+  z-index: -1;
 }
 
 .home-text-section {
@@ -102,22 +108,26 @@ nav {
   justify-content: center;
   align-items: flex-start;
   margin-left: 90px;
-
 }
+
 .primary-heading {
   font-size: clamp(1rem, 5vw, 2rem);
   color: #4c4c4c;
-  line-height: 5rem; 
+  line-height: 5rem;
   max-width: 900px;
-  padding-top:130px;
-  margin-right:15px;
+  padding-top: 130px;
+  margin-right: 15px;
 }
+
 .primary-text {
   font-size: clamp(1rem, 3vw, 1.7rem);
+  font-weight: 500;
   max-width: 730px;
-  color: #6a6a6a;
+  color: #575757;
   margin: 1.5rem 0rem;
+  text-shadow: 0px 0px 5px rgba(255, 255, 255);
 }
+
 .secondary-button {
   padding: 1rem 2.5rem;
   background-color: #6b8fdf;
@@ -132,23 +142,23 @@ nav {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-left:190px;
- 
+  margin-left: 190px;
 }
+
 .secondary-button svg {
   margin-left: 0.75rem;
   font-size: 1.5rem;
 }
+
 .secondary-button:hover {
   background-color: #87aaf4;
   transform: scale(1.05);
 }
 
-
-
-.nav-logo-container{
-  padding-left:30px;
-  margin-top:-4px;
+.nav-logo-container {
+  padding-left: 30px;
+  padding-top: 30px;
+  margin-top: -4px;
 }
 
 @media (max-width: 1000px) {
@@ -159,18 +169,14 @@ nav {
   .primary-button {
     font-size: 1rem;
   }
-
-
 }
+
 @media (max-width: 800px) {
   .nav-logo-container {
     max-width: 140px;
   }
   .navbar-links-container {
     display: none;
-  }
-  .navbar-menu-container {
-    display: flex;
   }
   .home-bannerImage-container {
     max-width: 450px;
@@ -202,6 +208,7 @@ nav {
     max-width: 95vw;
   }
 }
+
 @media (max-width: 1200px) {
   .home-image-section {
     display: none;
@@ -209,7 +216,7 @@ nav {
 }
 
 .nav-link:hover {
-  color: #6b8fdf; /* Change to your desired hover color */
+  color: #6b8fdf;
 }
 
 .nav-link::after {
@@ -217,7 +224,7 @@ nav {
   display: block;
   width: 0;
   height: 2px;
-  background: #6b8fdf; /* Change to your desired mini bar color */
+  background: #6b8fdf;
   transition: width 0.3s;
   position: absolute;
   bottom: -5px;
@@ -229,6 +236,7 @@ nav {
 .nav-link.active::after {
   width: 100%;
 }
+
 .nav-link {
   text-decoration: none;
   color: #6b8fdf;

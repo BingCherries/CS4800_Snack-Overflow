@@ -3,7 +3,7 @@
   flex-direction: column;
   gap: 20px;
   text-align: center; /* Center align text within container */
-  margin-top: -20px; /* Move the section up */
+  margin-top: 20px; 
   position: relative; /* Add relative positioning */
 }
 
