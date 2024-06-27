@@ -128,18 +128,12 @@ const Dashboard = () => {
               reactions={dashboardData.reactions}
               commonAllergens={dashboardData.commonAllergens}
           />
-          <ReactionsOverview
-              foods={dashboardData.foods}
-              reactions={dashboardData.reactions}
-              commonAllergens={dashboardData.commonAllergens}
-          />
         </Modal>
       )}
 
       {selectedModal === 'allergens' && (
         <Modal onClose={closeModal}>
           {/*<AllergenOverview />*/}
-          <AllergenOverview commonAllergens={dashboardData.commonAllergens} />
           <AllergenOverview commonAllergens={dashboardData.commonAllergens} />
         </Modal>
       )}
