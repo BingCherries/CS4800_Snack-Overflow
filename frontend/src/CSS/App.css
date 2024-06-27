@@ -148,6 +148,7 @@ nav {
 
 .nav-logo-container{
   padding-left:30px;
+  margin-top:-4px;
 }
 
 @media (max-width: 1000px) {
@@ -158,12 +159,8 @@ nav {
   .primary-button {
     font-size: 1rem;
   }
-  .home-bannerImage-container {
-    max-width: 600px;
-  }
-  .home-image-section{
-    max-width: 600px;
-  }
+
+
 }
 @media (max-width: 800px) {
   .nav-logo-container {
@@ -178,14 +175,7 @@ nav {
   .home-bannerImage-container {
     max-width: 450px;
   }
-  .home-image-section{
-    max-width: 450px;
-  }
- 
-  .home-image-sectionr {
-    width: 100%;
-    max-width: 400px;
-  }
+
   .primary-heading {
     text-align: center;
     max-width: 90%;
@@ -212,8 +202,7 @@ nav {
     max-width: 95vw;
   }
 }
-@media (max-width: 600px) {
-  .home-bannerImage-container,
+@media (max-width: 1200px) {
   .home-image-section {
     display: none;
   }

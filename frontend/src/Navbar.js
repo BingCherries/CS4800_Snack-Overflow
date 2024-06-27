@@ -23,18 +23,22 @@ export default function Navbar(){
     {
       text: "Home",
       icon: <HomeIcon />,
+      path: "/"
     },
     {
       text: "About",
       icon: <InfoIcon />,
+      path: "/about"
     },
     {
       text: "Login",
       icon: <LoginIcon />,
+      path: "/login"
     },
     {
       text: "Signup",
       icon: <SignupIcon />,
+      path: "/signup"
     },
   ];
   return (
@@ -43,14 +47,13 @@ export default function Navbar(){
         <h3>SAFEPAWS</h3>
       </div>
       <div className="navbar-links-container">
-  <NavLink exact to="/" className="nav-link" activeClassName="active">Home</NavLink>
-  <NavLink to="/about" className="nav-link" activeClassName="active">About us</NavLink>
-
-  <NavLink to="/record_reactions" className="nav-link" activeClassName="active">Record Reactions</NavLink>
-  <NavLink to="/dashboard" className="nav-link" activeClassName="active">Dashboard</NavLink>
-  <NavLink to="/login" className="nav-link" activeClassName="active">Log in</NavLink>
-  <NavLink to="/signup" ><button className="primary-button">Sign up</button></NavLink> 
-</div>
+        <NavLink exact to="/" className="nav-link" activeClassName="active">Home</NavLink>
+        <NavLink to="/about" className="nav-link" activeClassName="active">About us</NavLink>
+        <NavLink to="/record_reactions" className="nav-link" activeClassName="active">Record Reactions</NavLink>
+        <NavLink to="/dashboard" className="nav-link" activeClassName="active">Dashboard</NavLink>
+        <NavLink to="/login" className="nav-link" activeClassName="active">Log in</NavLink>
+        <NavLink to="/signup"><button className="primary-button">Sign up</button></NavLink>
+      </div>
       <div className="navbar-menu-container">
         <HiOutlineBars3 onClick={() => setOpenMenu(true)} />
       </div>
@@ -64,7 +67,7 @@ export default function Navbar(){
           <List>
             {menuOptions.map((item) => (
               <ListItem key={item.text} disablePadding>
-                <ListItemButton>
+                <ListItemButton component={NavLink} to={item.path}>
                   <ListItemIcon>{item.icon}</ListItemIcon>
                   <ListItemText primary={item.text} />
                 </ListItemButton>
@@ -75,7 +78,5 @@ export default function Navbar(){
         </Box>
       </Drawer>
     </nav>
-    );
-  };
-
-   
+  );
+}
