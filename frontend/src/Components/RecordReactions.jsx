@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import toast, { Toaster } from 'react-hot-toast'; // Importing toast for notifications
 import styles from '../CSS/RecordReactions.module.css'; // Importing styles
 import api from '../services/api';
@@ -19,13 +19,19 @@ const RecordReaction = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [filter, setFilter] = useState('mostRecent');
 
+  /* call to get the logs from the api
+  useEffect(() => {
+    fetchLogs();
+  }, []);*/
+  
+
   // Function to add ingredient to the list
-  const handleAddIngredient = () => {
+  function handleAddIngredient() {
     if (ingredientInput.trim() !== '') {
       setIngredients([...ingredients, ingredientInput.trim()]);
       setIngredientInput('');
     }
-  };
+  }
 
   // Function to remove ingredient from the list
   const handleRemoveIngredient = (index) => {
@@ -194,6 +200,17 @@ const RecordReaction = () => {
     }
   };
   
+/*  // Function to fetch logs from the API does not work
+const fetchLogs = async () => {
+  try {
+    const response = await api.get('/logs');
+    setLogs(response.data);
+  } catch (error) {
+    console.error('Error fetching logs:', error);
+    toast.error('Error fetching logs');
+  }
+};*/
+
 
   return (
     <div className={styles.recordReactionContainer}>
