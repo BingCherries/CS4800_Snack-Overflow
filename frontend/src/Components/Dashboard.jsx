@@ -18,6 +18,7 @@ const Dashboard = () => {
     reactions: [],
     commonAllergens: []
   });
+  const [reportData, setReportData] = useState([]);
 
   useEffect(() => {
     const fetchDashboardData = async () => {
@@ -34,6 +35,36 @@ const Dashboard = () => {
 
   const handleViewClick = (modalType) => {
     setSelectedModal(modalType);
+  };
+
+  const handleGenerateReport = async () => {
+    try {
+      const response = await axios.get('http://localhost:8080/allergyreport');
+      console.log('Report Data:', response.data);
+      const parsedData = parseReportData(response.data);
+      console.log('Parsed Report Data:', parsedData);
+      setReportData(parsedData || []);
+      setSelectedModal('report');
+    } catch (error) {
+      console.error('Error generating report:', error);
+    }
+  };
+
+  const parseReportData = (data) => {
+    const regex = /Food:\s*([^,]+),\s*Ingredients:\s*\[([^\]]+)\],\s*Symptom:\s*([^,]+),\s*Severity:\s*(\d+)/g;
+    const result = [];
+    let match;
+    while ((match = regex.exec(data)) !== null) {
+      result.push({
+        food: {
+          name: match[1].trim(),
+          ingredients: match[2].split(',').map(ingredient => ingredient.trim())
+        },
+        symptoms: match[3].trim(),
+        severity: parseInt(match[4], 10)
+      });
+    }
+    return result;
   };
 
   const closeModal = () => {
@@ -67,11 +98,12 @@ const Dashboard = () => {
       <div className={styles.bottomSection}>
         <div className={styles.generatedReportsSection}>
           <div className={styles.generatedReportsContent}>
-            <h2 className={styles.sectionTitle}>Generated Reports</h2>
-            <GeneratedReports />
+            <h2 className={styles.sectionTitle}>Generated Report</h2>
+            <button className={styles.viewButton} onClick={handleGenerateReport}>Generate Report</button>
+            <GeneratedReports/>
           </div>
           <div className={styles.doggo}>
-            <img src={doggo} alt="Dog" />
+            <img src={doggo} alt="Dog"/>
           </div>
           <div className={styles.cato}>
             <img src={cato} alt="Cat" />
@@ -103,17 +135,51 @@ const Dashboard = () => {
           <AllergenOverview commonAllergens={dashboardData.commonAllergens} />
         </Modal>
       )}
+
+      {selectedModal === 'report' && (
+          <Modal onClose={closeModal}>
+            <h2>Allergy Report</h2>
+            <table className={styles.reportTable}>
+              <thead>
+              <tr>
+                <th>Food</th>
+                <th>Ingredients</th>
+                <th>Symptoms</th>
+                <th>Severity</th>
+              </tr>
+              </thead>
+              <tbody>
+              {Array.isArray(reportData) && reportData.length > 0 ? (
+                  reportData.map((report, index) => (
+                      <tr key={index}>
+                        <td>{report.food?.name || 'N/A'}</td>
+                        <td>{report.food?.ingredients?.join(', ') || 'N/A'}</td>
+                        <td>{report.symptoms}</td>
+                        <td>{report.severity}</td>
+                      </tr>
+                  ))
+              ) : (
+                  <tr>
+                    <td colSpan="4">No data available</td>
+                  </tr>
+              )}
+
+              </tbody>
+            </table>
+          </Modal>
+      )}
+
     </div>
   );
 };
 
-const Modal = ({ onClose, children }) => (
-  <div className={styles.modal}>
-    <div className={styles.modalContent}>
-      <button onClick={onClose} className={styles.closeButton}>Close</button>
-      {children}
+const Modal = ({onClose, children}) => (
+    <div className={styles.modal}>
+      <div className={styles.modalContent}>
+        <button onClick={onClose} className={styles.closeButton}>Close</button>
+        {children}
+      </div>
     </div>
-  </div>
 );
 
 export default Dashboard;

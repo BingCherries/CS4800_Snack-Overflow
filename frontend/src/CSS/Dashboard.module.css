@@ -168,3 +168,25 @@
   cursor: pointer;
   padding: 5px;
 }
+
+.reportTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 1em;
+  min-width: 400px;
+}
+
+.reportTable th, .reportTable td {
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.reportTable th {
+  background-color: #f4f4f4;
+}
+
+.reportTable tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
