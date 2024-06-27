@@ -33,6 +33,7 @@
   text-align: center;
   margin-top: -10px; /* Move the title up */
   margin-left: 150px;
+  color:#4c4c4c;
 }
 
 .about-paragraph {
@@ -41,6 +42,7 @@
   line-height: 6vh;
   margin-top: -10px; /* Move the paragraph up */
   margin-left: 180px;
+  color: #6a6a6a;
 }
 
 .about-image {
