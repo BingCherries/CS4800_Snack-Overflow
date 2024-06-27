@@ -134,3 +134,15 @@
   font-size: 0.875em;
   margin-top: 5px;
 }
+.username-signup-form{
+  border-radius: 10px;
+  width: 300px;
+  font-size: 19px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  transition: border-color 0.3s;
+}
+.username-signup-form{
+  border-color: #4b81f5; 
+  outline: none;
+}
