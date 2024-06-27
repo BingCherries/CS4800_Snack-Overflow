@@ -69,7 +69,7 @@ public class UserDashboardService {
         //List<String> reactions = getAllergicReactionsSummary();
 
         List<String> reactions = allergicReactionRepository.findAll().stream()
-                .map(reaction -> reaction.getFood().getName()) // Ensure reaction.getFood() is not null
+                .map(AllergicReaction::getSymptoms)
                 .collect(Collectors.toList());
 
         List<String> commonAllergens = getIdentifiedCommonAllergens();

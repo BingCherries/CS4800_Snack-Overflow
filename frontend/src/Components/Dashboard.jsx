@@ -100,7 +100,7 @@ const Dashboard = () => {
       {selectedModal === 'allergens' && (
         <Modal onClose={closeModal}>
           {/*<AllergenOverview />*/}
-          <AllergenOverview allergens={dashboardData.commonAllergens} />
+          <AllergenOverview commonAllergens={dashboardData.commonAllergens} />
         </Modal>
       )}
     </div>
