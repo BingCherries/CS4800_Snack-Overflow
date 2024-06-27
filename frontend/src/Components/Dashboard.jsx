@@ -22,6 +22,7 @@ const Dashboard = () => {
   });
   const [reportData, setReportData] = useState([]);
 
+
   useEffect(() => {
     const fetchDashboardData = async () => {
       try {
@@ -69,10 +70,6 @@ const Dashboard = () => {
     return result;
   };
 
-  const closeModal = () => {
-    setSelectedModal(null);
-  };
-
   return (
     <div className={styles.dashboardContainer}>
       <h1 className={styles.dashboardTitle}>Dashboard</h1>
@@ -103,8 +100,12 @@ const Dashboard = () => {
             <h2 className={styles.sectionTitle}>Generated Report</h2>
             <button className={styles.viewButton} onClick={handleGenerateReport}>Generate Report</button>
             <GeneratedReports/>
+            <h2 className={styles.sectionTitle}>Generated Report</h2>
+            <button className={styles.viewButton} onClick={handleGenerateReport}>Generate Report</button>
+            <GeneratedReports/>
           </div>
           <div className={styles.doggo}>
+            <img src={doggo} alt="Dog"/>
             <img src={doggo} alt="Dog"/>
           </div>
           <div className={styles.cato}>
@@ -128,6 +129,11 @@ const Dashboard = () => {
               reactions={dashboardData.reactions}
               commonAllergens={dashboardData.commonAllergens}
           />
+          <ReactionsOverview
+              foods={dashboardData.foods}
+              reactions={dashboardData.reactions}
+              commonAllergens={dashboardData.commonAllergens}
+          />
         </Modal>
       )}
 
@@ -135,8 +141,43 @@ const Dashboard = () => {
         <Modal onClose={closeModal}>
           {/*<AllergenOverview />*/}
           <AllergenOverview commonAllergens={dashboardData.commonAllergens} />
+          <AllergenOverview commonAllergens={dashboardData.commonAllergens} />
         </Modal>
       )}
+
+      {selectedModal === 'report' && (
+          <Modal onClose={closeModal}>
+            <h2>Allergy Report</h2>
+            <table className={styles.reportTable}>
+              <thead>
+              <tr>
+                <th>Food</th>
+                <th>Ingredients</th>
+                <th>Symptoms</th>
+                <th>Severity</th>
+              </tr>
+              </thead>
+              <tbody>
+              {Array.isArray(reportData) && reportData.length > 0 ? (
+                  reportData.map((report, index) => (
+                      <tr key={index}>
+                        <td>{report.food?.name || 'N/A'}</td>
+                        <td>{report.food?.ingredients?.join(', ') || 'N/A'}</td>
+                        <td>{report.symptoms}</td>
+                        <td>{report.severity}</td>
+                      </tr>
+                  ))
+              ) : (
+                  <tr>
+                    <td colSpan="4">No data available</td>
+                  </tr>
+              )}
+
+              </tbody>
+            </table>
+          </Modal>
+      )}
+
 
       {selectedModal === 'report' && (
           <Modal onClose={closeModal}>
