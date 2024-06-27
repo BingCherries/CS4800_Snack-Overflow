@@ -69,6 +69,9 @@ const Dashboard = () => {
     }
     return result;
   };
+  const closeModal = () => {
+    setSelectedModal(null);
+  };
 
   return (
     <div className={styles.dashboardContainer}>
