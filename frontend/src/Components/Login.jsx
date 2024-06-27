@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import styles from "../CSS/login.module.css"; // Import CSS module
+import styles from "../CSS/login.module.css"; 
+import loginBlob from "../Images/loginblob.png"; 
+import rightblob from "../Images/loginblobright.png"
+import bigpaw from "../Images/petperson.png";
+
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -38,6 +42,9 @@ const Login = () => {
 
   return (
     <div className={styles.loginform}>
+      <img src={bigpaw} alt="Big Paw" className={styles["bigpaw-image"]} />      
+      <img src={loginBlob} className={styles["login-blob"]} alt="Login Blob" />
+      <img src={rightblob} className={styles["right-blob"]} alt="Right Blob" />
       <h3 className={styles["login-title"]}>Login</h3>
       <h1 className={styles["welcome-login"]}>Welcome back!</h1>
       <div className={styles["form-group-login"]}>
@@ -53,9 +60,9 @@ const Login = () => {
               placeholder="Email-Address"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-            />
+           />
             {emailError && <span className={styles.error}>{emailError}</span>}
-
+            <br></br>
             <label htmlFor="password">Password:</label>
             <input
               className={styles["password-login-form"]}

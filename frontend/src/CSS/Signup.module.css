@@ -2,81 +2,93 @@
   background-color: white;
   width: 700px;
   margin: 100px auto;
-  /* margin in top and bottom will be 50px  */
-  /* left and right auto  */
-
   padding-bottom: 280px;
   padding-left: 90px;
   padding-right: 90px;
   border-radius: 15px;
   box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.065);
+  position: relative; 
 }
 
-.have-account{
+.have-account {
   margin-right: 160px;
-  padding-top:15px;
+  padding-top: 15px;
 }
-.welcome_safepaws{
-  padding-top:25px;
-  margin-left:60px;
-  font-size:2.5rem;
+
+.welcome_safepaws {
+  padding-top: 25px;
+  margin-left: 60px;
+  font-size: 2.5rem;
 }
-.signup-title{
-  padding-left:150px;
-  margin-left:15px;
-  padding-top:100px;
+
+.signup-title {
+  padding-left: 150px;
+  margin-left: 15px;
+  padding-top: 100px;
   font-size: 50px;
 }
-.signup-line{
-margin-left: 120px;
-font-size:20px;
 
+.signup-line {
+  margin-left: 120px;
+  font-size: 20px;
 }
-.form-group{
-  margin-top:90px;
-  padding-left:55px;
+
+.form-group {
+  margin-top: 70px;
+  padding-left: 55px;
 }
-.signup-btn{
+
+.signup-btn {
   border-radius: 10px;
   width: 170px;
   font-size: 18px;
   padding: 10px 24px;
   margin-left: 10px;
+  background-color: #6b8fdf; 
+  color: white;
+  border: none;
 }
-.btn-location{
-  margin-top: 78px;
+
+.signup-btn:hover {
+  background:#85a6ee;
+  transition: 0.2s;
+  transform: scale(1.05);
+}
+
+.btn-location {
+  margin-top: 40px;
   margin-left: 40px;
 }
-.email-signup-form{
+
+.email-signup-form,
+.password-signup-form {
   border-radius: 10px;
-  font-size: 19px;
   width: 300px;
+  font-size: 19px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  transition: border-color 0.3s;
 }
 
-.password-signup-form{
-  border-radius: 10px;
-  font-size: 19px;
-  width: 300px;
+.email-signup-form:focus,
+.password-signup-form:focus {
+  border-color: #4b81f5; 
+  outline: none;
 }
 
-.addUserForm .inputGroup {
+.inputGroup {
   width: 100%;
   display: flex;
   flex-direction: column;
 }
 
-.addUserForm .inputGroup label {
-  margin-top: 10px;
+
+.inputGroup {
+  margin-top: -20px;
+  margin-left: 60px;
+  padding-top: -80px;
 }
 
-.addUserForm .inputGroup input {
-  margin-top: 5px;
-  padding: 10px;
-}
-.inputGroup input{
-  margin-top: 5px;
-  padding: 10px;
-}
 .inputGroup button {
   margin-top: 10px;
 }
@@ -88,8 +100,49 @@ font-size:20px;
   text-transform: uppercase;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
 }
-.inputGroup{
-  margin-left:60px;
-  padding-top:-80px;
-  
+
+.login-blob {
+  position: fixed;
+  top: 0; 
+  right: 61%; 
+  width: 10vw; 
+  width: 45%; 
+  height: auto;
+  z-index: -1; 
+}
+
+.right-blob {
+  position: fixed;
+  bottom: -12%; 
+  right: -12%; 
+  width: 10vw; 
+  width:35%; 
+  height: auto;
+  z-index: -1; 
+}
+.mananddog{
+  position: absolute;
+  bottom: 9px;
+  left: 190px;
+  width: 50%; 
+  height: auto;
+  margin-top: 80px; 
+  margin-left: 10px; 
+}
+.error {
+  color: red;
+  font-size: 0.875em;
+  margin-top: 5px;
+}
+.username-signup-form{
+  border-radius: 10px;
+  width: 300px;
+  font-size: 19px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  transition: border-color 0.3s;
+}
+.username-signup-form{
+  border-color: #4b81f5; 
+  outline: none;
 }
